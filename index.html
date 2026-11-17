@@ -48,6 +48,44 @@ body::after {
   pointer-events: none; z-index: 0;
 }
 
+/* ---- TOP NAV ---- */
+.top-nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 200;
+  display: flex; align-items: center;
+  height: 56px;
+  padding: 0 24px;
+  background: rgba(13,27,74,0.85);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--glass-border);
+}
+.top-nav .nav-logo {
+  height: 22px; width: auto; margin-right: 24px; flex-shrink: 0;
+}
+.top-nav .nav-links {
+  display: flex; gap: 4px; flex: 1; justify-content: center;
+}
+.top-nav .nav-link {
+  padding: 6px 16px;
+  border-radius: 20px;
+  border: none;
+  background: transparent;
+  color: var(--text-dim);
+  font-family: inherit; font-size: 11px; font-weight: 500;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.3s;
+  white-space: nowrap;
+}
+.top-nav .nav-link:hover { color: var(--text); background: var(--glass); }
+.top-nav .nav-link.active {
+  color: var(--sky);
+  background: var(--sky-dim);
+}
+.top-nav .nav-sf-logo {
+  height: 28px; width: auto; flex-shrink: 0; opacity: 0.8;
+}
+
 /* ---- PAGES ---- */
 .pages-wrap {
   display: flex;
@@ -60,7 +98,7 @@ body::after {
   min-width: 100vw; height: 100vh;
   overflow-y: auto; overflow-x: hidden;
   display: flex; flex-direction: column;
-  padding: 60px 48px 100px;
+  padding: 72px 48px 80px;
   position: relative;
   scrollbar-width: thin;
   scrollbar-color: rgba(255,255,255,0.2) transparent;
@@ -68,54 +106,7 @@ body::after {
 .page::-webkit-scrollbar { width: 6px; }
 .page::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 3px; }
 
-/* ---- LOGOS ---- */
-.sf-logo {
-  position: absolute; top: 24px; right: 32px;
-  width: 160px; height: auto; opacity: 0.85;
-  z-index: 5; pointer-events: none;
-}
-.elal-logo {
-  position: absolute; top: 24px; left: 32px;
-  height: 48px; width: auto; opacity: 0.9;
-  z-index: 5; pointer-events: none;
-}
-
-/* ---- PLANE THEME ---- */
-.plane-icon {
-  position: absolute; z-index: 4; pointer-events: none;
-  animation: planeFloat 5s ease-in-out infinite;
-  filter: drop-shadow(0 8px 24px rgba(99,199,239,0.25));
-  font-size: 96px;
-}
-.plane-sm { font-size: 64px; bottom: 80px; left: 32px; }
-@keyframes planeFloat {
-  0%   { transform: translateY(0)    rotate(0deg); }
-  15%  { transform: translateY(-30px) rotate(3deg); }
-  30%  { transform: translateY(-18px) rotate(-2deg); }
-  50%  { transform: translateY(-36px) rotate(2deg); }
-  70%  { transform: translateY(-12px) rotate(-3deg); }
-  85%  { transform: translateY(-28px) rotate(1.5deg); }
-  100% { transform: translateY(0)    rotate(0deg); }
-}
-
-/* ---- NAVIGATION ---- */
-.nav-dots {
-  position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%);
-  display: flex; gap: 10px; z-index: 100;
-}
-.dot {
-  width: 12px; height: 12px; border-radius: 50%;
-  background: rgba(255,255,255,0.25);
-  border: none; cursor: pointer;
-  transition: all 0.4s ease;
-}
-.dot.active {
-  background: var(--sky);
-  box-shadow: 0 0 12px rgba(99,199,239,0.6);
-  transform: scale(1.25);
-}
-.dot:hover:not(.active) { background: rgba(255,255,255,0.5); }
-
+/* ---- NAVIGATION ARROWS ---- */
 .nav-btn {
   position: fixed; top: 50%; z-index: 100;
   transform: translateY(-50%);
@@ -228,20 +219,6 @@ a:hover { opacity: 0.8; }
 .tab-panel { display: none; }
 .tab-panel.active { display: block; }
 
-/* ---- STEP CARDS ---- */
-.step {
-  display: flex; gap: 16px; align-items: flex-start;
-}
-.step-num {
-  min-width: 56px; height: 56px;
-  border-radius: 50%; display: flex; align-items: center; justify-content: center;
-  background: var(--sky); color: var(--navy);
-  font-weight: 700; font-size: 22px;
-  flex-shrink: 0;
-}
-.step-body { flex: 1; }
-.step-body p { margin-bottom: 6px; }
-
 /* ---- Q CARD ---- */
 .q-card {
   background: var(--glass);
@@ -298,28 +275,6 @@ a:hover { opacity: 0.8; }
   border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
   font-size: 13px; line-height: 1.7;
 }
-
-/* ---- CREDENTIAL BLOCK ---- */
-.cred-block {
-  background: rgba(0,0,0,0.3);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius);
-  padding: 24px;
-  font-size: 13px;
-  line-height: 2.2;
-}
-.cred-block .label { color: var(--text-dim); display: inline-block; min-width: 120px; }
-.cred-block .val { color: var(--sky); font-weight: 600; }
-.copy-btn {
-  display: inline-flex; align-items: center; gap: 4px;
-  padding: 2px 10px; margin-left: 8px;
-  border-radius: 6px; border: 1px solid var(--glass-border);
-  background: var(--glass); color: var(--text-dim);
-  font-family: inherit; font-size: 11px;
-  cursor: pointer; transition: all 0.2s;
-}
-.copy-btn:hover { border-color: var(--sky-border); color: var(--sky); }
-.copy-btn.copied { border-color: #4ade80; color: #4ade80; }
 
 /* ---- ANIMATIONS ---- */
 @keyframes fadeInUp {
@@ -379,62 +334,201 @@ a:hover { opacity: 0.8; }
   font-size: 24px; font-weight: 300; color: var(--text-dim);
 }
 
-/* ---- BREAK PAGE ---- */
-.break-center {
+/* ---- PLACEHOLDER ---- */
+.placeholder-center {
   flex: 1; display: flex; flex-direction: column;
   align-items: center; justify-content: center;
-  text-align: center; gap: 24px;
+  text-align: center; gap: 16px;
 }
-
-/* ---- SESSION TOGGLE ---- */
-.agenda-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
-.agenda-head h2 { margin-bottom: 0; }
-.session-toggle { position: relative; display: inline-flex; padding: 4px; border-radius: 24px; background: var(--glass); border: 1px solid var(--glass-border); }
-.session-toggle input { position: absolute; opacity: 0; width: 1px; height: 1px; }
-.session-toggle label { padding: 6px 20px; border-radius: 20px; font-size: 13px; font-weight: 600; letter-spacing: 1px; color: var(--text-dim); cursor: pointer; transition: background 0.25s, color 0.25s; }
-.session-toggle label:hover { color: var(--text); }
-.session-toggle input:checked + label { background: var(--sky); color: var(--navy); }
 
 .spacer { height: 16px; }
 
 /* ---- SETUP STEPPER ---- */
-.setup-stepper { background: var(--glass); border: 1px solid var(--glass-border); border-radius: var(--radius); padding: 24px; backdrop-filter: blur(12px); }
-.stepper-head { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; font-size: 13px; color: var(--text-dim); }
-.stepper-progress { flex: 1; height: 4px; background: rgba(255,255,255,0.1); border-radius: 2px; overflow: hidden; }
-.stepper-bar { height: 100%; background: var(--sky); border-radius: 2px; transition: width 0.4s ease; width: 0%; }
-.stepper-window { position: relative; }
+.setup-stepper {
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  backdrop-filter: blur(12px);
+  overflow: hidden;
+}
+.stepper-head {
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  padding: 9px 20px;
+  border-bottom: 1px solid var(--glass-border);
+  font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: var(--text-dim);
+}
+.stepper-head strong { color: var(--sky); font-size: 15px; }
+.stepper-progress { flex: 1; max-width: 340px; height: 6px; border-radius: 3px; background: rgba(255,255,255,0.1); overflow: hidden; }
+.stepper-bar { height: 100%; width: 0; background: linear-gradient(90deg, var(--sky), #4ade80); transition: width 0.5s cubic-bezier(0.22,1,0.36,1); }
+.stepper-window {
+  height: clamp(360px, calc(100vh - 350px), 720px);
+  overflow-y: auto;
+  padding: 12px 20px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.25) transparent;
+}
 .setup-step { display: none; }
-.setup-step.active { display: block; animation: fadeInUp 0.4s ease forwards; }
-.step-instr { margin: 12px 0; padding: 12px 16px; background: rgba(0,0,0,0.2); border-radius: var(--radius-sm); font-size: 13px; line-height: 1.8; }
-.step-instr .row { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+.setup-step.active { display: block; animation: stepInRight 0.45s cubic-bezier(0.16,1,0.3,1); }
+.setup-step.active.from-left { animation-name: stepInLeft; }
+@keyframes stepInRight { from { opacity: 0; transform: translateX(48px); } to { opacity: 1; transform: none; } }
+@keyframes stepInLeft { from { opacity: 0; transform: translateX(-48px); } to { opacity: 1; transform: none; } }
+.setup-step .step { margin-bottom: 10px; }
+.setup-step .step-body p { color: var(--text-dim); font-size: 13px; }
+.step-instr {
+  padding: 10px 16px; margin-bottom: 12px;
+  background: rgba(0,0,0,0.25);
+  border-left: 3px solid var(--sky);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  font-size: 15px; line-height: 1.7;
+}
+.step-instr .row { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 .step-instr code { color: var(--sky); font-family: inherit; font-weight: 600; }
-.stepper-controls { display: flex; align-items: center; justify-content: space-between; margin-top: 16px; }
-.stepper-actions { display: flex; align-items: center; gap: 12px; }
-.stepper-btn { padding: 8px 20px; border-radius: 20px; border: 1px solid var(--sky-border); background: var(--sky-dim); color: var(--sky); font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.25s; }
-.stepper-btn:hover { background: rgba(99,199,239,0.25); }
+.shot { position: relative; display: block; max-width: calc(400px * 16 / 9); margin: 0 auto; border-radius: var(--radius-sm); overflow: hidden; border: 1px solid var(--glass-border); }
+.shot img { display: block; width: 100%; height: auto; }
+.shot-hint { position: absolute; right: 8px; bottom: 8px; padding: 3px 9px; border-radius: 6px; background: rgba(4,45,96,0.8); color: #fff; font-size: 11px; pointer-events: none; }
+.stepper-complete {
+  display: none;
+  margin: 0 20px 14px; padding: 12px 18px;
+  border-radius: var(--radius-sm);
+  background: rgba(74,222,128,0.12); border: 1px solid rgba(74,222,128,0.4);
+  color: #4ade80; font-size: 14px; font-weight: 600;
+}
+.stepper-reset { margin-left: 10px; padding: 2px 12px; border-radius: 12px; border: 1px solid rgba(74,222,128,0.5); background: transparent; color: #4ade80; font-family: inherit; font-size: 11px; cursor: pointer; }
+.stepper-reset:hover { background: rgba(74,222,128,0.15); }
+.setup-stepper.complete .stepper-complete { display: block; animation: fadeInUp 0.5s cubic-bezier(0.16,1,0.3,1); }
+.stepper-controls {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 10px 20px;
+  border-top: 1px solid var(--glass-border);
+}
+.stepper-btn {
+  padding: 10px 22px; border-radius: 24px;
+  border: 1px solid var(--glass-border); background: var(--glass);
+  color: var(--text); font-family: inherit; font-size: 13px; font-weight: 600;
+  cursor: pointer; transition: all 0.3s;
+}
+.stepper-btn:hover:not(:disabled) { border-color: var(--sky); color: var(--sky); }
 .stepper-btn:disabled { opacity: 0.3; cursor: default; }
-.stepper-complete { display: none; padding: 20px; text-align: center; font-size: 14px; color: var(--sky); }
-.stepper-complete.show { display: block; }
-.stepper-reset { margin-left: 12px; background: none; border: 1px solid var(--glass-border); color: var(--text-dim); font-family: inherit; font-size: 12px; padding: 4px 12px; border-radius: 12px; cursor: pointer; }
+.stepper-btn.stepper-next { padding: 12px 30px; font-size: 15px; background: var(--sky); border-color: var(--sky); color: var(--navy); box-shadow: 0 4px 18px rgba(99,199,239,0.35); }
+.stepper-btn.stepper-next:hover:not(:disabled) { color: var(--navy); filter: brightness(1.08); }
+.setup-stepper.complete .stepper-btn.stepper-next { background: #4ade80; border-color: #4ade80; color: var(--navy); box-shadow: none; opacity: 1; }
+.stepper-actions { display: flex; align-items: center; gap: 14px; }
+.step { display: flex; gap: 16px; align-items: flex-start; }
+.step-num {
+  min-width: 48px; height: 48px;
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  background: var(--sky); color: var(--navy);
+  font-weight: 700; font-size: 20px;
+  flex-shrink: 0;
+}
+.copy-btn {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 2px 10px; margin-left: 8px;
+  border-radius: 6px; border: 1px solid var(--glass-border);
+  background: var(--glass); color: var(--text-dim);
+  font-family: inherit; font-size: 11px;
+  cursor: pointer; transition: all 0.2s;
+}
+.copy-btn:hover { border-color: var(--sky-border); color: var(--sky); }
+.copy-btn.copied { border-color: #4ade80; color: #4ade80; }
 
-/* screenshot images */
-.shot { display: block; margin: 12px auto 0; max-width: 600px; border-radius: var(--radius-sm); overflow: hidden; border: 1px solid var(--glass-border); transition: border-color 0.3s; }
-.shot img { width: 100%; display: block; }
-.shot:hover { border-color: var(--sky-border); }
-.shot-hint { display: block; text-align: center; font-size: 11px; color: var(--text-dim); padding: 6px; background: rgba(0,0,0,0.3); }
+/* ---- INFO MODAL ---- */
+.info-modal { position: fixed; inset: 0; z-index: 250; display: none; align-items: center; justify-content: center; background: rgba(2,12,40,0.6); backdrop-filter: blur(3px); }
+.info-modal.open { display: flex; animation: fadeIn 0.25s ease; }
+.info-modal-card { position: relative; max-width: 560px; margin: 24px; padding: 26px 28px 22px; border-radius: var(--radius); background: linear-gradient(135deg, var(--navy), var(--blue)); border: 1px solid var(--sky-border); box-shadow: 0 20px 60px rgba(0,0,0,0.5); animation: fadeInUp 0.35s cubic-bezier(0.16,1,0.3,1); }
+.info-modal-card h3 { color: var(--sky); margin-bottom: 12px; padding-right: 28px; }
+.info-modal-card p { font-size: 14px; line-height: 1.8; }
+.info-modal-card code { color: var(--sky); font-family: inherit; font-weight: 600; }
+.info-modal-close { position: absolute; top: 12px; right: 14px; width: 30px; height: 30px; border-radius: 50%; border: 1px solid var(--glass-border); background: var(--glass); color: var(--text); font-size: 16px; cursor: pointer; }
+.info-modal-close:hover { border-color: var(--sky); color: var(--sky); }
+
+/* ---- KNOWLEDGE PAGE ---- */
+.kn-sub { font-size: 18px; margin: 8px 0 12px; }
+.card + .kn-sub { margin-top: 28px; }
+.q-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+.q-row > .copy-btn { flex-shrink: 0; margin-top: 2px; }
+.tip-box {
+  padding: 14px 18px;
+  border-radius: var(--radius-sm);
+  background: rgba(96,165,250,0.08);
+  border-left: 3px solid #60a5fa;
+  font-size: 13px; line-height: 1.6;
+}
+.tip-box .tip-label { font-weight: 600; color: #60a5fa; margin-bottom: 4px; }
+.warn-box {
+  padding: 14px 18px;
+  border-radius: var(--radius-sm);
+  background: rgba(251,191,36,0.08);
+  border-left: 3px solid #fbbf24;
+  font-size: 13px; line-height: 1.6;
+}
+.pdf-row {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 16px;
+  border-radius: var(--radius-sm);
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  margin-bottom: 8px;
+  transition: border-color 0.2s;
+}
+.pdf-row:hover { border-color: var(--sky-border); }
+.pdf-icon { font-size: 44px; flex-shrink: 0; }
+.pdf-info { flex: 1; }
+.pdf-info .pdf-name { font-size: 13px; font-weight: 500; }
+.pdf-info .pdf-sub { font-size: 11px; color: var(--text-dim); }
+.pdf-dl {
+  padding: 6px 14px; border-radius: 8px;
+  border: 1px solid #1B96FF;
+  background: #0176D3;
+  color: #fff;
+  font-family: inherit; font-size: 11px; font-weight: 600;
+  cursor: pointer; transition: all 0.2s; text-decoration: none;
+}
+.pdf-dl:hover { background: #1B96FF; }
+.shot.split-shot { max-width: 100%; }
+.split-link { position: absolute; top: 0; bottom: 0; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 14px; text-decoration: none; transition: background 0.25s; }
+.split-left { left: 0; }
+.split-right { right: 0; }
+.split-link span { padding: 6px 14px; border-radius: 20px; background: rgba(4,45,96,0.88); border: 1px solid var(--sky-border); color: #fff; font-size: 12px; font-weight: 600; }
+.split-link:hover { background: rgba(99,199,239,0.12); outline: 3px solid var(--sky); outline-offset: -3px; }
+.split-link:hover span { background: var(--sky); border-color: var(--sky); }
 </style>
 </head>
 <body>
+
+<!-- ============ TOP NAV ============ -->
+<nav class="top-nav" id="topNav">
+  <img src="images/elal-logo.svg" class="nav-logo" alt="El Al">
+  <div class="nav-links" id="navLinks">
+    <button class="nav-link active" data-page="0">Welcome</button>
+    <button class="nav-link" data-page="1">Agenda</button>
+    <button class="nav-link" data-page="2">Cloud Setup</button>
+    <button class="nav-link" data-page="3">Tableau Knowledge</button>
+    <button class="nav-link" data-page="4">Tableau Studio</button>
+    <button class="nav-link" data-page="5">Data Apps</button>
+    <button class="nav-link" data-page="6">Q&amp;A</button>
+    <button class="nav-link" data-page="7">Thank You</button>
+  </div>
+  <img src="images/Tableau-From-Salesforce-Logo-REVERSE.png" class="nav-sf-logo" alt="Tableau from Salesforce">
+</nav>
+
+<!-- ============ MODALS ============ -->
+<div class="info-modal" id="eventCodeHelp" role="dialog" aria-modal="true" onclick="if (event.target === this) closeModal(this.id)">
+  <div class="info-modal-card">
+    <button class="info-modal-close" aria-label="Close" onclick="closeModal('eventCodeHelp')">✕</button>
+    <h3>Invalid or inactive event code?</h3>
+    <p>HOT Pass acts as a magic link creating your user on Tableau Cloud and providing access to the Cloud Workspace. If you can't progress ask a facilitator to add you manually to Tableau Cloud and enter the email address <code>you@example.com</code>. This should allow you to progress to the Cloud and Workspace access screen.</p>
+  </div>
+</div>
 
 <!-- ============ PAGES ============ -->
 <div class="pages-wrap" id="pagesWrap">
 
 <!-- ========== PAGE 0: WELCOME ========== -->
 <section class="page active" data-page="0">
-  <img src="images/Tableau-From-Salesforce-Logo-REVERSE.png" class="sf-logo" alt="Tableau from Salesforce">
   <div class="welcome-center">
     <div class="partner-row animate-in">
-      <img src="images/elal-logo.svg" alt="El Al" style="height:64px; background:rgba(255,255,255,0.12); padding:8px 16px; border-radius:12px;">
+      <img src="images/elal-logo.svg" alt="El Al" style="height:40px;">
       <span class="partner-x">×</span>
       <img src="images/Tableau-From-Salesforce-Logo-REVERSE.png" alt="Tableau" style="height:48px;">
     </div>
@@ -449,149 +543,332 @@ a:hover { opacity: 0.8; }
     <p class="welcome-text animate-in" style="margin-top:-20px;">
       From built-in AI to headless analytics, Tableau is the platform to deliver accurate, contextual responses, visualisation and analytics for users to see, understand and act on data. So let's take a tour today through Tableau's ever evolving platform that enables every organisation to turn trusted knowledge into action.
     </p>
-    <button class="cta welcome-cta animate-in" onclick="goToPage(current + 1)">Let's get Started <span style="font-size:18px;">→</span></button>
+    <button class="cta welcome-cta animate-in" onclick="goToPage(1)">Let's get Started <span style="font-size:18px;">→</span></button>
   </div>
 </section>
 
 <!-- ========== PAGE 1: AGENDA ========== -->
 <section class="page" data-page="1">
-  <img src="images/Tableau-From-Salesforce-Logo-REVERSE.png" class="sf-logo" alt="">
-  <img src="images/elal-logo.svg" class="elal-logo" alt="El Al" style="background:rgba(255,255,255,0.1); padding:6px 12px; border-radius:8px;">
-  <div class="content-area">
+  <div class="content-area" style="display:flex; flex-direction:column; justify-content:center;">
     <div class="section-tag animate-in">Schedule</div>
-    <div class="agenda-head animate-in">
-      <h2>Agenda</h2>
-    </div>
+    <h2 class="animate-in">Agenda</h2>
     <div class="spacer"></div>
     <div class="card animate-in">
       <table class="agenda-table">
-        <thead><tr><th>Topic</th><th>Time</th></tr></thead>
+        <thead><tr><th>Topic</th><th>Time</th><th>Duration</th></tr></thead>
         <tbody>
-          <tr><td>Introduction</td><td>09:00</td></tr>
-          <tr><td>Tableau Knowledge</td><td>09:30</td></tr>
-          <tr><td>Tableau Agent in Pulse</td><td>09:50</td></tr>
-          <tr><td>Dashboard Q&amp;A</td><td>10:10</td></tr>
-          <tr class="break-row"><td>BREAK</td><td>10:30</td></tr>
-          <tr><td>Headless Analytics</td><td>11:00</td></tr>
-          <tr><td>Tableau Studio</td><td>11:30</td></tr>
-          <tr><td>Wrap-up</td><td>12:10</td></tr>
-          <tr class="break-row"><td>CLOSE</td><td>12:30</td></tr>
+          <tr><td>Cloud Setup</td><td>10:00</td><td>10 min</td></tr>
+          <tr><td>Tableau Knowledge</td><td>10:10</td><td>30 min</td></tr>
+          <tr><td>Tableau Studio</td><td>10:40</td><td>30 min</td></tr>
+          <tr><td>Data Apps</td><td>11:10</td><td>30 min</td></tr>
+          <tr><td>Q&amp;A</td><td>11:40</td><td>20 min</td></tr>
+          <tr class="break-row"><td>CLOSE</td><td>12:00</td><td></td></tr>
         </tbody>
       </table>
     </div>
   </div>
 </section>
 
-<!-- ========== PAGE 2: PLACEHOLDER — SETUP ========== -->
+<!-- ========== PAGE 2: CLOUD SETUP ========== -->
 <section class="page" data-page="2">
-  <img src="images/Tableau-From-Salesforce-Logo-REVERSE.png" class="sf-logo" alt="">
-  <img src="images/elal-logo.svg" class="elal-logo" alt="El Al" style="background:rgba(255,255,255,0.1); padding:6px 12px; border-radius:8px;">
-  <div class="content-area" style="display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:16px;">
+  <div class="content-area">
     <div class="section-tag animate-in">Setup</div>
-    <h2 class="animate-in">Let's get Connected</h2>
-    <p class="animate-in dim">This section will be built next — Tableau Cloud setup steps.</p>
+    <h2 class="animate-in">Let's get Connected — Tableau Cloud</h2>
+    <p class="animate-in" style="margin-bottom:12px; line-height:1.8;">Get your Tableau Cloud login from Hot Pass and sign in. Click <strong>Next</strong> after each step to move on.</p>
+    <div class="setup-stepper animate-in" id="cloudStepper">
+      <div class="stepper-head">
+        <span>Step <strong class="stepper-current">1</strong> of <span class="stepper-total">5</span></span>
+        <div class="stepper-progress"><div class="stepper-bar"></div></div>
+        <span><strong class="stepper-done-count">0</strong> done</span>
+      </div>
+      <div class="stepper-window">
+      <div class="setup-step active" data-step="1">
+        <div class="step"><div class="step-num">1</div><div class="step-body"><h3>Get your Hot Pass</h3><p>Hot Pass creates your Tableau Cloud account for the workshop.</p></div></div>
+        <div class="step-instr"><div class="row"><span>Go to <a href="https://hotpass.demo.tableau.com/" target="_blank" rel="noopener"><code>https://hotpass.demo.tableau.com/</code></a></span><button class="copy-btn" onclick="copyText(this,'https://hotpass.demo.tableau.com/')">copy</button></div><div class="row"><span>Add the email you'll sign in to Claude with, and the code <code>TABLEAUXAI</code></span><button class="copy-btn" onclick="copyText(this,'TABLEAUXAI')">copy</button></div><div class="row"><span>Click <strong>GET MY ACCESS →</strong></span></div></div>
+        <a class="shot" href="images/cloud/step-01.webp" target="_blank" rel="noopener"><img src="images/cloud/step-01.webp" alt="Hot Pass page with email and event code" loading="lazy"><span class="shot-hint">⤢ Click to enlarge</span></a>
+      </div>
+      <div class="setup-step" data-step="2">
+        <div class="step"><div class="step-num">2</div><div class="step-body"><h3>Accept your Tableau Cloud invite</h3><p>Hot Pass emails you an invitation to the workshop site.</p></div></div>
+        <div class="step-instr"><div class="row"><span>You will receive an email inviting you to Tableau Cloud</span></div><div class="row"><span><strong>Sign in</strong> (Register if necessary)</span></div></div>
+        <a class="shot" href="images/cloud/step-02.webp" target="_blank" rel="noopener"><img src="images/cloud/step-02.webp" alt="Email inviting you to Tableau Cloud" loading="lazy"><span class="shot-hint">⤢ Click to enlarge</span></a>
+      </div>
+      <div class="setup-step" data-step="3">
+        <div class="step"><div class="step-num">3</div><div class="step-body"><h3>Or open Tableau Cloud from Hot Pass</h3><p>Your Hot Pass page links straight to the site too.</p></div></div>
+        <div class="step-instr">You can also <strong>Open Tableau Cloud</strong> from here</div>
+        <a class="shot" href="images/cloud/step-03.webp" target="_blank" rel="noopener"><img src="images/cloud/step-03.webp" alt="Hot Pass access page with Open Tableau Cloud button" loading="lazy"><span class="shot-hint">⤢ Click to enlarge</span></a>
+      </div>
+      <div class="setup-step" data-step="4">
+        <div class="step"><div class="step-num">4</div><div class="step-body"><h3>Welcome to HOT Tableau XAI</h3><p>This is the Tableau Cloud site for today's hands-on.</p></div></div>
+        <div class="step-instr"><div class="row"><span>You're logged into <strong>HOT Tableau XAI</strong>!</span></div><div class="row"><span>Note options for <strong>Tableau Knowledge</strong> and <strong>Tableau Pulse</strong> in the left hand menu. We'll be using those shortly.</span></div></div>
+        <a class="shot" href="images/cloud/step-04.webp" target="_blank" rel="noopener"><img src="images/cloud/step-04.webp" alt="Tableau Cloud home page on HOT Tableau XAI" loading="lazy"><span class="shot-hint">⤢ Click to enlarge</span></a>
+      </div>
+      <div class="setup-step" data-step="5">
+        <div class="step"><div class="step-num">5</div><div class="step-body"><h3>Favourite the workshop project</h3><p>The workshop's dashboards and data sources are all in one project.</p></div></div>
+        <div class="step-instr">Find and Favourite the <strong>Tableau x AI Workshop</strong> project. We'll use it throughout the session</div>
+        <a class="shot" href="images/cloud/step-05.webp" target="_blank" rel="noopener"><img src="images/cloud/step-05.webp" alt="Tableau x AI Workshop project in Explore" loading="lazy"><span class="shot-hint">⤢ Click to enlarge</span></a>
+      </div>
+      </div>
+      <div class="stepper-complete">✓ You're connected to HOT Tableau XAI. Next up: Tableau Knowledge.<button class="stepper-reset">Start over</button></div>
+      <div class="stepper-controls">
+        <button class="stepper-btn stepper-prev" aria-label="Previous step">◂ Prev</button>
+        <div class="stepper-actions">
+          <button class="reveal-trigger" style="margin:0;" onclick="openModal('eventCodeHelp')">Invalid or inactive event code?</button>
+          <button class="stepper-btn stepper-next" aria-label="Next step">Next ▸</button>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- ========== PAGE 3: PLACEHOLDER — KNOWLEDGE ========== -->
+<!-- ========== PAGE 3: TABLEAU KNOWLEDGE ========== -->
 <section class="page" data-page="3">
-  <img src="images/Tableau-From-Salesforce-Logo-REVERSE.png" class="sf-logo" alt="">
-  <img src="images/elal-logo.svg" class="elal-logo" alt="El Al" style="background:rgba(255,255,255,0.1); padding:6px 12px; border-radius:8px;">
-  <div class="content-area" style="display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:16px;">
+  <div class="content-area">
     <div class="section-tag animate-in">Hands-on</div>
     <h2 class="animate-in">Tableau Knowledge</h2>
-    <p class="animate-in dim">Coming soon — knowledge exercises.</p>
+    <p class="animate-in" style="margin-bottom:24px; line-height:1.8;">
+      Meet Tableau Knowledge, the enterprise knowledge management solution that unifies all of your data assets into live knowledge graphs that your team can explore and enrich. With the ability to centralize all of your business knowledge, continuously improve it, and make it accessible to any AI agent. Agents that can quickly access the context needed to respond accurately and act reliably.
+    </p>
+
+    <p class="animate-in sky bold" style="font-size:16px; margin-bottom:16px;">Follow along with your instructor</p>
+
+    <h3 class="animate-in kn-sub">Relevance and Accuracy — Experience why Tableau Knowledge matters</h3>
+
+    <!-- Step 1 -->
+    <div class="card animate-in">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h3>See the impact — with and without knowledge</h3>
+          <p>Let's view the response from Tableau Agent with and without knowledge. We'll ask the same question of a workbook containing business preferences and one without and compare.</p>
+          <p>From the picture below click on the example workbook in Tableau Cloud <strong>WITHOUT</strong> business preferences associated to open it. Open <strong>Tableau Agent</strong> from the blue menu bar, accept the use of AI, and ask the question</p>
+          <p class="sky bold q-row" style="margin:8px 0;"><span>"<span class="q-copy">Which is our best performing product category over the last 52 weeks?</span>"</span><button class="copy-btn" onclick="copyQuestion(this)">copy</button></p>
+          <p>Note the response. Quick, simple, but inaccurate!</p>
+          <p style="margin-top:8px;">Now click on the example <strong>WITH</strong> Business Preferences and repeat. You might be asked to validate what you mean by best (Tableau Agent doesn't assume if there is any question). Confirm with the policy aligned <code class="sky">gross margin</code> <button class="copy-btn" onclick="copyText(this,'gross margin')">copy</button> figure if asked.</p>
+          <p>Note the difference.</p>
+          <div class="shot split-shot" style="margin-top:12px;">
+            <img src="images/knowledge/with-without-retail.webp" alt="Retail Sales dashboard side by side: WITHOUT vs WITH Business Preferences" loading="lazy">
+            <a class="split-link split-left" style="width:49.7%;" href="https://prod-uswest-c.online.tableau.com/t/hot-tableauxai/views/RetailSales-WITHOUTBusinessPreferences/RetailSalesTradingPerformance" target="_blank" rel="noopener"><span>Open WITHOUT Business Preferences ↗</span></a>
+            <a class="split-link split-right" style="left:50.3%;" href="https://prod-uswest-c.online.tableau.com/t/hot-tableauxai/views/RetailSales-WITHBusinessPreferences-Test/RetailSales-TradingPerformance" target="_blank" rel="noopener"><span>Open WITH Business Preferences ↗</span></a>
+          </div>
+          <div class="tip-box" style="margin-top:12px;">
+            <div class="tip-label">Why it matters</div>
+            Define a business rule once in Tableau Knowledge, and every agent that reads the graph applies it. Change the rule, and the answers change with it. No prompt changes, no new dashboards. You will connect your own agent to Tableau through MCP later today.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="animate-in kn-sub">Let's see how we curate Knowledge</h3>
+
+    <!-- Step 2 -->
+    <div class="card animate-in">
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h3>Navigate to Tableau Knowledge</h3>
+          <p>From the Tableau Home page, click <span class="bold sky">Tableau Knowledge</span> in the left navigation bar.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 3 -->
+    <div class="card animate-in">
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h3>Explore the Default Graph</h3>
+          <p>Open the <span class="bold">Default</span> knowledge graph and review the assets available. Browse through Data Sources, Workbooks, Views and other content indexed in the graph.</p>
+          <p>Can you find the <span class="bold">Retail Sales - WITH Business Preferences</span> workbook? What additional relationships does this workbook have as opposed to <span class="bold">WITHOUT</span> Business Preferences?</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 4 -->
+    <div class="card animate-in">
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <h3>Search for fun content</h3>
+          <p>Try searching for: <span class="bold">Music</span>, <span class="bold">Film</span>, <span class="bold">Football</span>, <span class="bold">Cars</span>.</p>
+          <p class="dim">Can you find all four? Why not?</p>
+          <button class="reveal-trigger" onclick="toggleReveal(this)">
+            Reveal why <span class="arrow">▶</span>
+          </button>
+          <div class="reveal-content">
+            <div class="reveal-inner">
+              Permissions in Tableau Cloud still apply inside Knowledge. Each data source is governed by the same permissions as the rest of Tableau — if you don't have access to a data source, it won't appear in the knowledge graph either. Different user accounts can see different subsets of the fun content.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 5 -->
+    <div class="card animate-in">
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-body">
+          <h3>Find a workshop Data Source</h3>
+          <p>Search for one of the five industry data sources created for this workshop:</p>
+          <ul style="margin:8px 0 8px 20px; font-size:13px;">
+            <li>Retail Banking Performance</li>
+            <li>Retail Sales Performance</li>
+            <li>Telecommunications Service Performance</li>
+            <li>Energy Generation Portfolio</li>
+            <li>Hospital Network Performance</li>
+          </ul>
+          <p>Click through to the associated workbook and drill into the elements — fields, relationships and lineage.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 6 -->
+    <div class="card animate-in">
+      <div class="step">
+        <div class="step-num">6</div>
+        <div class="step-body">
+          <h3>Upload a Business Preferences file</h3>
+          <p>Download the Business Preferences PDF for your chosen industry, then upload it to the <span class="bold">Default Graph</span>.
+            <button class="reveal-trigger" style="margin:0; padding:2px 10px; font-size:10px;" onclick="toggleReveal(this)">i<span class="arrow" style="display:none;">▶</span></button>
+          </p>
+          <div class="reveal-content">
+            <div class="reveal-inner">
+              Business Preferences are scoped to <strong>'Global (all entities)'</strong> at this time. Workbook and Data Source business preferences can be added through authoring.
+            </div>
+          </div>
+          <div class="warn-box" style="margin-top:10px;">
+            <strong>Upload to the Default Graph only.</strong> Open <strong>Manage Graphs</strong> → <strong>Default Graph</strong>. Check that the graph name at the top says <strong>Default Graph</strong> before you click <strong>+</strong> (top right). Leave the other graphs as they are: your instructor uses them for demos.
+          </div>
+          <div class="spacer"></div>
+          <div class="pdf-row">
+            <div class="pdf-icon">📄</div>
+            <div class="pdf-info">
+              <div class="pdf-name">Retail Banking Business Preferences</div>
+              <div class="pdf-sub">Meridian Bank — Data &amp; Analytics Governance</div>
+            </div>
+            <a class="pdf-dl" href="pdfs/banking_business_preferences.pdf" target="_blank" style="background:rgba(74,222,128,0.15);border-color:rgba(74,222,128,0.35);color:#4ade80;">Review</a>
+            <a class="pdf-dl" href="pdfs/banking_business_preferences.pdf" download>Download</a>
+          </div>
+          <div class="pdf-row">
+            <div class="pdf-icon">📄</div>
+            <div class="pdf-info">
+              <div class="pdf-name">Retail Sales Business Preferences</div>
+              <div class="pdf-sub">Summit Retail Group — Trading Analytics Governance</div>
+            </div>
+            <a class="pdf-dl" href="pdfs/retail_business_preferences.pdf" target="_blank" style="background:rgba(74,222,128,0.15);border-color:rgba(74,222,128,0.35);color:#4ade80;">Review</a>
+            <a class="pdf-dl" href="pdfs/retail_business_preferences.pdf" download>Download</a>
+          </div>
+          <div class="pdf-row">
+            <div class="pdf-icon">📄</div>
+            <div class="pdf-info">
+              <div class="pdf-name">Telecommunications Business Preferences</div>
+              <div class="pdf-sub">Horizon Telecom — Network &amp; Customer Analytics</div>
+            </div>
+            <a class="pdf-dl" href="pdfs/telco_business_preferences.pdf" target="_blank" style="background:rgba(74,222,128,0.15);border-color:rgba(74,222,128,0.35);color:#4ade80;">Review</a>
+            <a class="pdf-dl" href="pdfs/telco_business_preferences.pdf" download>Download</a>
+          </div>
+          <div class="pdf-row">
+            <div class="pdf-icon">📄</div>
+            <div class="pdf-info">
+              <div class="pdf-name">Energy Business Preferences</div>
+              <div class="pdf-sub">Redgum Energy — Generation Portfolio Analytics</div>
+            </div>
+            <a class="pdf-dl" href="pdfs/energy_business_preferences.pdf" target="_blank" style="background:rgba(74,222,128,0.15);border-color:rgba(74,222,128,0.35);color:#4ade80;">Review</a>
+            <a class="pdf-dl" href="pdfs/energy_business_preferences.pdf" download>Download</a>
+          </div>
+          <div class="pdf-row">
+            <div class="pdf-icon">📄</div>
+            <div class="pdf-info">
+              <div class="pdf-name">Healthcare Business Preferences</div>
+              <div class="pdf-sub">Lakeside Health Network — Clinical &amp; Operational Analytics</div>
+            </div>
+            <a class="pdf-dl" href="pdfs/healthcare_business_preferences.pdf" target="_blank" style="background:rgba(74,222,128,0.15);border-color:rgba(74,222,128,0.35);color:#4ade80;">Review</a>
+            <a class="pdf-dl" href="pdfs/healthcare_business_preferences.pdf" download>Download</a>
+          </div>
+          <div class="spacer"></div>
+          <p class="dim" style="font-size:12px;">To add: click <span class="bold">+</span> → <span class="bold">Add Business Preferences</span> → <span class="bold">Upload Document</span></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 7 -->
+    <div class="card animate-in">
+      <div class="step">
+        <div class="step-num">7</div>
+        <div class="step-body">
+          <h3>Check graph health</h3>
+          <p>Return to the Knowledge home page and review the <span class="bold">Health</span> score for the Default graph. Then ask the agent:</p>
+          <p class="sky bold q-row" style="margin:8px 0;"><span>"<span class="q-copy">What do I need to do to improve the health of this knowledge graph?</span>"</span><button class="copy-btn" onclick="copyQuestion(this)">copy</button></p>
+          <p class="dim">The agent will suggest adding descriptions, relationships, or enrichments to improve coverage.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 8 -->
+    <div class="card animate-in">
+      <div class="step">
+        <div class="step-num">8</div>
+        <div class="step-body">
+          <h3>Create your own Knowledge Graph <span class="dim" style="font-size:11px;">(if time permits)</span></h3>
+          <p>Create a new Knowledge Graph and use <span class="bold">Manage Sources</span> to bring in content.</p>
+          <div class="warn-box" style="margin-top:10px;">
+            <strong>Important:</strong> Prefix your graph name with your initials to avoid conflicts. There is a maximum of 5 Knowledge Graphs on this site. Once 5 graphs exist you can't add more: the option to create a graph is greyed out.
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- ========== PAGE 4: PLACEHOLDER — PULSE ========== -->
+<!-- ========== PAGE 4: TABLEAU STUDIO ========== -->
 <section class="page" data-page="4">
-  <img src="images/Tableau-From-Salesforce-Logo-REVERSE.png" class="sf-logo" alt="">
-  <img src="images/elal-logo.svg" class="elal-logo" alt="El Al" style="background:rgba(255,255,255,0.1); padding:6px 12px; border-radius:8px;">
-  <div class="content-area" style="display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:16px;">
-    <div class="section-tag animate-in">Hands-on</div>
-    <h2 class="animate-in">Tableau Agent in Pulse</h2>
-    <p class="animate-in dim">Coming soon — Pulse exercises.</p>
-  </div>
-</section>
-
-<!-- ========== PAGE 5: PLACEHOLDER — DASHBOARD ========== -->
-<section class="page" data-page="5">
-  <img src="images/Tableau-From-Salesforce-Logo-REVERSE.png" class="sf-logo" alt="">
-  <img src="images/elal-logo.svg" class="elal-logo" alt="El Al" style="background:rgba(255,255,255,0.1); padding:6px 12px; border-radius:8px;">
-  <div class="content-area" style="display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:16px;">
-    <div class="section-tag animate-in">Hands-on</div>
-    <h2 class="animate-in">Tableau Agent in Dashboard</h2>
-    <p class="animate-in dim">Coming soon — Dashboard Q&amp;A exercises.</p>
-  </div>
-</section>
-
-<!-- ========== PAGE 6: BREAK ========== -->
-<section class="page" data-page="6">
-  <img src="images/Tableau-From-Salesforce-Logo-REVERSE.png" class="sf-logo" alt="">
-  <div class="break-center">
-    <div class="section-tag animate-in">10:30</div>
-    <h1 class="animate-in" style="font-size:clamp(2rem,4vw,3rem);">Time for a Break ✈️</h1>
-    <p class="animate-in dim" style="font-size:16px;">Grab a coffee — we'll be back shortly.</p>
-  </div>
-</section>
-
-<!-- ========== PAGE 7: PLACEHOLDER — HEADLESS ========== -->
-<section class="page" data-page="7">
-  <img src="images/Tableau-From-Salesforce-Logo-REVERSE.png" class="sf-logo" alt="">
-  <img src="images/elal-logo.svg" class="elal-logo" alt="El Al" style="background:rgba(255,255,255,0.1); padding:6px 12px; border-radius:8px;">
-  <div class="content-area" style="display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:16px;">
-    <div class="section-tag animate-in">Hands-on</div>
-    <h2 class="animate-in">Headless Analytics</h2>
-    <p class="animate-in dim">Coming soon — Headless / MCP exercises.</p>
-  </div>
-</section>
-
-<!-- ========== PAGE 8: PLACEHOLDER — STUDIO ========== -->
-<section class="page" data-page="8">
-  <img src="images/Tableau-From-Salesforce-Logo-REVERSE.png" class="sf-logo" alt="">
-  <img src="images/elal-logo.svg" class="elal-logo" alt="El Al" style="background:rgba(255,255,255,0.1); padding:6px 12px; border-radius:8px;">
-  <div class="content-area" style="display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:16px;">
+  <div class="content-area" style="display:flex; flex-direction:column; justify-content:center;">
     <div class="section-tag animate-in">Hands-on</div>
     <h2 class="animate-in">Tableau Studio</h2>
-    <p class="animate-in dim">Coming soon — Studio exercises.</p>
+    <p class="animate-in dim">This section will be built next — Studio exercises and content.</p>
   </div>
 </section>
 
-<!-- ========== PAGE 9: WRAP-UP ========== -->
-<section class="page" data-page="9">
-  <img src="images/Tableau-From-Salesforce-Logo-REVERSE.png" class="sf-logo" alt="">
-  <img src="images/elal-logo.svg" class="elal-logo" alt="El Al" style="background:rgba(255,255,255,0.1); padding:6px 12px; border-radius:8px;">
-  <div class="content-area" style="display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:16px;">
-    <div class="section-tag animate-in">12:10</div>
-    <h2 class="animate-in">Wrap-up</h2>
-    <p class="animate-in dim">Coming soon — wrap-up and survey.</p>
+<!-- ========== PAGE 5: DATA APPS ========== -->
+<section class="page" data-page="5">
+  <div class="content-area" style="display:flex; flex-direction:column; justify-content:center;">
+    <div class="section-tag animate-in">Hands-on</div>
+    <h2 class="animate-in">Data Apps</h2>
+    <p class="animate-in dim">This section will be built next — Data Apps exercises and content.</p>
   </div>
 </section>
 
-<!-- ========== PAGE 10: THANK YOU ========== -->
-<section class="page" data-page="10">
-  <img src="images/Tableau-From-Salesforce-Logo-REVERSE.png" class="sf-logo" alt="">
+<!-- ========== PAGE 6: Q&A ========== -->
+<section class="page" data-page="6">
+  <div class="content-area" style="display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;">
+    <div class="section-tag animate-in">11:40</div>
+    <h2 class="animate-in">Q&amp;A</h2>
+    <p class="animate-in dim" style="max-width:600px;">
+      Open floor for questions — ask us anything about Tableau AI, Knowledge, Studio, Data Apps, or your own use cases.
+    </p>
+  </div>
+</section>
+
+<!-- ========== PAGE 7: THANK YOU ========== -->
+<section class="page" data-page="7">
   <div class="welcome-center">
     <div class="partner-row animate-in">
-      <img src="images/elal-logo.svg" alt="El Al" style="height:64px; background:rgba(255,255,255,0.12); padding:8px 16px; border-radius:12px;">
+      <img src="images/elal-logo.svg" alt="El Al" style="height:40px;">
       <span class="partner-x">×</span>
       <img src="images/Tableau-From-Salesforce-Logo-REVERSE.png" alt="Tableau" style="height:48px;">
     </div>
-    <div class="section-tag animate-in">12:30</div>
+    <div class="section-tag animate-in">12:00</div>
     <h2 class="animate-in" style="font-size:clamp(1.6rem,3.5vw,2.6rem);">Thank You!</h2>
     <p class="welcome-text animate-in">
       Thank you for joining us today! We hope you enjoyed exploring Tableau's AI-powered analytics platform.
       If you have any questions or want to continue the conversation, don't hesitate to reach out.
     </p>
-    <p class="animate-in" style="font-size:48px;">✈️🎉</p>
   </div>
 </section>
 
 </div><!-- /pages-wrap -->
 
-<!-- ============ NAVIGATION ============ -->
-<div class="nav-dots" id="navDots"></div>
+<!-- ============ NAVIGATION ARROWS ============ -->
 <button class="nav-btn hide" id="prevBtn" aria-label="Previous page">◂</button>
 <button class="nav-btn" id="nextBtn" aria-label="Next page">▸</button>
 
@@ -599,20 +876,12 @@ a:hover { opacity: 0.8; }
 <script>
 const wrap = document.getElementById('pagesWrap');
 const pages = document.querySelectorAll('.page');
-const dotsContainer = document.getElementById('navDots');
+const navLinks = document.querySelectorAll('#navLinks .nav-link');
 const prevBtn = document.getElementById('prevBtn');
 const nextBtn = document.getElementById('nextBtn');
 const totalPages = pages.length;
 let current = 0;
 let isTransitioning = false;
-
-for (let i = 0; i < totalPages; i++) {
-  const dot = document.createElement('button');
-  dot.className = 'dot' + (i === 0 ? ' active' : '');
-  dot.setAttribute('aria-label', 'Go to page ' + (i + 1));
-  dot.addEventListener('click', () => goToPage(i));
-  dotsContainer.appendChild(dot);
-}
 
 function goToPage(n) {
   if (n < 0 || n >= totalPages || n === current || isTransitioning) return;
@@ -634,8 +903,8 @@ function goToPage(n) {
     current = n;
     wrap.style.transform = `translateX(-${current * 100}vw)`;
 
-    dotsContainer.querySelectorAll('.dot').forEach((d, i) => {
-      d.classList.toggle('active', i === current);
+    navLinks.forEach(link => {
+      link.classList.toggle('active', parseInt(link.dataset.page) === current);
     });
 
     prevBtn.classList.toggle('hide', current === 0);
@@ -664,6 +933,10 @@ function goToPage(n) {
   }, exitDuration + 600);
 }
 
+navLinks.forEach(link => {
+  link.addEventListener('click', () => goToPage(parseInt(link.dataset.page)));
+});
+
 prevBtn.addEventListener('click', () => goToPage(current - 1));
 nextBtn.addEventListener('click', () => goToPage(current + 1));
 
@@ -678,7 +951,7 @@ let touchStartX = 0, touchStartY = 0, touchInField = false;
 document.addEventListener('touchstart', e => {
   touchStartX = e.touches[0].clientX;
   touchStartY = e.touches[0].clientY;
-  touchInField = inField(e.target);
+  touchInField = inField(e.target) || (e.target instanceof Element && !!e.target.closest('#topNav'));
 }, { passive: true });
 document.addEventListener('touchend', e => {
   if (touchInField) return;
@@ -703,15 +976,7 @@ document.querySelectorAll('.tabs').forEach(tabGroup => {
   });
 });
 
-document.querySelectorAll('.reveal-trigger').forEach(btn => {
-  btn.addEventListener('click', () => {
-    btn.classList.toggle('open');
-    const content = btn.nextElementSibling;
-    if (content && content.classList.contains('reveal-content')) {
-      content.classList.toggle('open');
-    }
-  });
-});
+// reveal-triggers are handled by toggleReveal() via onclick
 
 function copyText(btn, text) {
   navigator.clipboard.writeText(text).then(() => {
@@ -720,6 +985,65 @@ function copyText(btn, text) {
     setTimeout(() => { btn.classList.remove('copied'); btn.textContent = 'copy'; }, 1500);
   });
 }
+
+function openModal(id) { document.getElementById(id).classList.add('open'); }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+window.addEventListener('keydown', e => {
+  const open = document.querySelector('.info-modal.open');
+  if (!open) return;
+  if (e.key === 'Escape') closeModal(open.id);
+  if (e.key.startsWith('Arrow') || e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); }
+}, true);
+
+function toggleReveal(btn) {
+  btn.classList.toggle('open');
+  const content = btn.nextElementSibling;
+  if (content && content.classList.contains('reveal-content')) content.classList.toggle('open');
+}
+
+function copyQuestion(btn) {
+  copyText(btn, btn.parentElement.querySelector('.q-copy').textContent.trim());
+}
+
+document.querySelectorAll('.setup-stepper').forEach(function(root) {
+  const all = [...root.querySelectorAll('.setup-step')];
+  const win = root.querySelector('.stepper-window');
+  const sPrev = root.querySelector('.stepper-prev');
+  const sNext = root.querySelector('.stepper-next');
+  const done = new Set();
+  const id = s => all.indexOf(s);
+  let cur = all[0];
+
+  function render(dir) {
+    const i = all.indexOf(cur), last = all.length - 1;
+    all.forEach(s => { const on = s === cur; s.classList.toggle('active', on); s.classList.toggle('from-left', on && dir < 0); });
+    all.forEach((s, k) => { const n = s.querySelector('.step-num'); if (n) n.textContent = k + 1; });
+    win.scrollTop = 0;
+    const doneN = all.filter(s => done.has(id(s))).length, complete = done.has(id(all[last]));
+    root.querySelector('.stepper-current').textContent = i + 1;
+    const total = root.querySelector('.stepper-total'); if (total) total.textContent = all.length;
+    root.querySelector('.stepper-done-count').textContent = doneN;
+    root.querySelector('.stepper-bar').style.width = (doneN / all.length * 100) + '%';
+    sPrev.disabled = i === 0;
+    sNext.disabled = (i === last && complete);
+    sNext.textContent = i < last ? 'Next ▸' : complete ? 'Finished ✓' : 'Finish ✓';
+    root.classList.toggle('complete', complete);
+  }
+
+  function step(delta) {
+    const i = all.indexOf(cur) + delta;
+    if (i >= 0 && i < all.length) { cur = all[i]; render(delta); }
+  }
+
+  root.querySelector('.stepper-reset').addEventListener('click', () => { done.clear(); cur = all[0]; render(-1); });
+  sPrev.addEventListener('click', () => step(-1));
+  sNext.addEventListener('click', () => {
+    done.add(id(cur));
+    if (all.indexOf(cur) < all.length - 1) step(1); else render(0);
+  });
+
+  render(0);
+});
 </script>
 
 </body>
