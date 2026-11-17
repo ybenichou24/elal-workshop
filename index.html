@@ -551,6 +551,8 @@ a:hover { opacity: 0.8; }
 .hunt .hunt-q { font-size: 14px; font-weight: 500; line-height: 1.6; }
 .hunt .hunt-icon { margin-right: 6px; }
 .shot.shot-md { max-width: calc(330px * 16 / 9); }
+.card-link { position: absolute; border-radius: 5.2% / 4.2%; transition: background 0.25s, box-shadow 0.25s; }
+.card-link:hover, .card-link:focus-visible { background: rgba(99,199,239,0.06); box-shadow: 0 0 0 4px var(--sky), 0 10px 30px rgba(99,199,239,0.35); outline: none; }
 </style>
 </head>
 <body>
@@ -1486,19 +1488,61 @@ a:hover { opacity: 0.8; }
 </section>
 
 <!-- ========== PAGE 8: THANK YOU ========== -->
-<section class="page" data-page="8">
-  <div class="welcome-center">
-    <div class="partner-row animate-in">
+<section class="page" data-page="8" id="thank-you">
+  <div class="content-area" style="display:flex; flex-direction:column; justify-content:center;">
+    <div class="partner-row animate-in" style="margin-bottom:16px;">
       <img src="images/elal-logo.svg" alt="El Al" style="height:40px;">
       <span class="partner-x">×</span>
       <img src="images/Tableau-From-Salesforce-Logo-REVERSE.png" alt="Tableau" style="height:48px;">
     </div>
     <div class="section-tag animate-in">12:00</div>
     <h2 class="animate-in" style="font-size:clamp(1.6rem,3.5vw,2.6rem);">Thank You!</h2>
-    <p class="welcome-text animate-in">
-      Thank you for joining us today! We hope you enjoyed exploring Tableau's AI-powered analytics platform.
-      If you have any questions or want to continue the conversation, don't hesitate to reach out.
+    <p class="animate-in" style="line-height:1.9; margin-bottom:16px;">
+      Thank you for joining us for today's Tableau x AI workshop!
     </p>
+    <p class="animate-in" style="line-height:1.9; margin-bottom:16px;">
+      You rolled up your sleeves, got hands-on with the latest Tableau capabilities, and asked the kinds of questions that kept us on our toes. Along the way, you proved that AI can help you find insights faster. You've moved from Tableau legend to Tableau superhero.
+    </p>
+    <p class="animate-in" style="line-height:1.9; margin-bottom:16px;">
+      We hope you leave with new ideas, a few "wow, it can do that?" moments, and the confidence to put Tableau and AI to work on your own data. Keep exploring, keep experimenting, and keep asking your data tougher questions. Because Tableau x AI can give you smarter answers!
+    </p>
+    <p class="animate-in sky bold" style="font-size:1.2em; margin-bottom:32px;">May the DATA be with you.</p>
+    <div class="shot split-shot animate-in" style="margin-bottom:32px;">
+      <img src="images/where-to-from-here.webp" alt="Where to from here? Try Tableau MCP, Trial Tableau Cloud, Contact your Account Executive" loading="lazy">
+      <a class="card-link" style="left:4.7%; top:27.8%; width:28.1%; height:61.1%;" href="https://tableau.github.io/tableau-mcp/" target="_blank" rel="noopener" aria-label="Try Tableau MCP"></a>
+      <a class="card-link" style="left:35.9%; top:27.8%; width:28.1%; height:61.1%;" href="https://www.tableau.com/trial/tableau-cloud" target="_blank" rel="noopener" aria-label="Trial Tableau Cloud"></a>
+    </div>
+
+    <h3 class="animate-in" style="margin-bottom:16px;">Keep exploring</h3>
+    <div class="card animate-in">
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
+        <div>
+          <h3 style="font-size:16px; color:var(--sky); margin-bottom:10px;">Tableau Knowledge</h3>
+          <a href="https://www.tableau.com/products/tableau-knowledge" target="_blank" style="display:block; font-size:13px;">Product page</a>
+        </div>
+        <div>
+          <h3 style="font-size:16px; color:var(--sky); margin-bottom:10px;">Tableau Pulse</h3>
+          <a href="https://www.tableau.com/products/tableau-pulse" target="_blank" style="display:block; font-size:13px;">Product page</a>
+        </div>
+        <div>
+          <h3 style="font-size:16px; color:var(--sky); margin-bottom:10px;">Tableau Agent</h3>
+          <a href="https://www.tableau.com/products/tableau-agent" target="_blank" style="display:block; font-size:13px;">Product page</a>
+        </div>
+        <div>
+          <h3 style="font-size:16px; color:var(--sky); margin-bottom:10px;">Tableau Studio</h3>
+          <span class="dim" style="font-size:13px;">Coming soon — check <a href="https://www.tableau.com/products/new-features" target="_blank">New Features</a></span>
+        </div>
+        <div>
+          <h3 style="font-size:16px; color:var(--sky); margin-bottom:10px;">Headless Analytics</h3>
+          <a href="https://www.tableau.com/products/embedded-analytics" target="_blank" style="display:block; font-size:13px;">Embedded Analytics</a>
+        </div>
+        <div>
+          <h3 style="font-size:16px; color:var(--sky); margin-bottom:10px;">Tableau AI — Overview</h3>
+          <a href="https://www.tableau.com/products/tableau-ai" target="_blank" style="display:block; font-size:13px; margin-bottom:4px;">Tableau AI product page</a>
+          <a href="https://www.tableau.com/ai" target="_blank" style="display:block; font-size:13px;">tableau.com/ai</a>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
