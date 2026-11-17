@@ -492,6 +492,65 @@ a:hover { opacity: 0.8; }
 .split-link span { padding: 6px 14px; border-radius: 20px; background: rgba(4,45,96,0.88); border: 1px solid var(--sky-border); color: #fff; font-size: 12px; font-weight: 600; }
 .split-link:hover { background: rgba(99,199,239,0.12); outline: 3px solid var(--sky); outline-offset: -3px; }
 .split-link:hover span { background: var(--sky); border-color: var(--sky); }
+
+/* ---- DATA APPS ---- */
+.mcp-client-btns { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0; }
+.choice-btn { padding: 8px 18px; border-radius: 20px; border: 1px solid var(--glass-border); background: var(--glass); color: var(--text-dim); font-family: inherit; font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.3s; }
+.choice-btn:hover { border-color: var(--sky-border); color: var(--text); }
+.choice-btn.selected { background: var(--sky); border-color: var(--sky); color: var(--navy); }
+.prompt-row { display: flex; align-items: flex-start; gap: 12px; }
+.prompt-row .q-text { flex: 1; font-size: 13px; line-height: 1.6; }
+.prompt-row .copy-btn { flex-shrink: 0; margin-top: 2px; }
+.da-strap { margin-top: 10px; font-size: 13px; }
+.da-open { display: flex; align-items: center; gap: 14px; max-width: 420px; padding: 12px 18px; }
+.da-open .dash-icon { margin: 0; font-size: 26px; }
+.da-open .dash-title { margin: 0; }
+.da-notes { margin: 6px 0 0 20px; font-size: 12px; line-height: 1.7; color: var(--text-dim); }
+.da-notes li { font-size: 12px; color: var(--text-dim); margin-bottom: 4px; }
+.dash-card {
+  display: block; padding: 20px;
+  border-radius: var(--radius);
+  border: 1px solid var(--glass-border);
+  background: var(--glass);
+  backdrop-filter: blur(12px);
+  cursor: pointer;
+  transition: all 0.3s;
+  text-decoration: none;
+  color: var(--text);
+}
+.dash-card:hover {
+  border-color: var(--sky);
+  background: var(--sky-dim);
+  transform: translateY(-3px);
+}
+.dash-card .dash-icon { font-size: 48px; margin-bottom: 8px; }
+.dash-card .dash-title { font-size: 13px; font-weight: 600; }
+.dash-card .dash-sub { font-size: 11px; color: var(--text-dim); margin-top: 4px; }
+.spacer-lg { height: 40px; }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media (max-width: 768px) { .two-col { grid-template-columns: 1fr; } }
+.dash-card .dash-user { font-size: 11px; color: var(--sky); font-weight: 600; margin-top: 8px; }
+.discovery-seq { counter-reset: disc; }
+.disc-step {
+  counter-increment: disc;
+  position: relative;
+  padding: 10px 0 10px 38px;
+  font-size: 13px; line-height: 1.6;
+}
+.disc-step::before {
+  content: counter(disc);
+  position: absolute; left: 0; top: 10px;
+  width: 26px; height: 26px; border-radius: 50%;
+  background: var(--sky); color: var(--navy);
+  font-weight: 700; font-size: 13px;
+  display: flex; align-items: center; justify-content: center;
+}
+.disc-step p { font-size: 13px; line-height: 1.6; }
+.hunt-list .hunt { border-top: 1px solid var(--glass-border); padding: 12px 0; }
+.hunt-list .hunt:first-child { border-top: none; padding-top: 4px; }
+.hunt .hunt-q { font-size: 14px; font-weight: 500; line-height: 1.6; }
+.hunt .hunt-icon { margin-right: 6px; }
+.shot.shot-md { max-width: calc(330px * 16 / 9); }
 </style>
 </head>
 <body>
@@ -504,10 +563,11 @@ a:hover { opacity: 0.8; }
     <button class="nav-link" data-page="1">Agenda</button>
     <button class="nav-link" data-page="2">Cloud Setup</button>
     <button class="nav-link" data-page="3">Tableau Knowledge</button>
-    <button class="nav-link" data-page="4">Tableau Studio</button>
-    <button class="nav-link" data-page="5">Data Apps</button>
-    <button class="nav-link" data-page="6">Q&amp;A</button>
-    <button class="nav-link" data-page="7">Thank You</button>
+    <button class="nav-link" data-page="4">Data Apps</button>
+    <button class="nav-link" data-page="5">Studio Setup</button>
+    <button class="nav-link" data-page="6">Tableau Studio</button>
+    <button class="nav-link" data-page="7">Q&amp;A</button>
+    <button class="nav-link" data-page="8">Thank You</button>
   </div>
   <img src="images/Tableau-From-Salesforce-Logo-REVERSE.png" class="nav-sf-logo" alt="Tableau from Salesforce">
 </nav>
@@ -559,8 +619,9 @@ a:hover { opacity: 0.8; }
         <tbody>
           <tr><td>Cloud Setup</td><td>10:00</td><td>10 min</td></tr>
           <tr><td>Tableau Knowledge</td><td>10:10</td><td>30 min</td></tr>
-          <tr><td>Tableau Studio</td><td>10:40</td><td>30 min</td></tr>
-          <tr><td>Data Apps</td><td>11:10</td><td>30 min</td></tr>
+          <tr><td>Data Apps</td><td>10:40</td><td>20 min</td></tr>
+          <tr><td>Studio Setup</td><td>11:00</td><td>10 min</td></tr>
+          <tr><td>Tableau Studio</td><td>11:10</td><td>30 min</td></tr>
           <tr><td>Q&amp;A</td><td>11:40</td><td>20 min</td></tr>
           <tr class="break-row"><td>CLOSE</td><td>12:00</td><td></td></tr>
         </tbody>
@@ -820,26 +881,601 @@ a:hover { opacity: 0.8; }
   </div>
 </section>
 
-<!-- ========== PAGE 4: TABLEAU STUDIO ========== -->
+<!-- ========== PAGE 4: DATA APPS ========== -->
 <section class="page" data-page="4">
-  <div class="content-area" style="display:flex; flex-direction:column; justify-content:center;">
+  <div class="content-area">
+    <div class="section-tag animate-in">Hands-on</div>
+    <h2 class="animate-in">Headless Analytics with Tableau MCP</h2>
+    <p class="animate-in" style="margin-bottom:10px; line-height:1.8;">
+      Headless analytics means your Tableau data doesn't have to be read through a Tableau screen. Tableau MCP lets Claude, Copilot, ChatGPT, or any AI agent, query your published data sources directly. It uses the same certified fields, calculations and permissions as your dashboards, and the data is as fresh as the latest refresh.
+    </p>
+    <div class="card animate-in mcp-clients" style="margin-bottom:16px;">
+      <h3>See what Tableau MCP might look like in Claude, ChatGPT, Copilot, BLENDer</h3>
+      <div class="mcp-client-btns"><button class="choice-btn" type="button" data-mcp-client="claude" onclick="showMcpClient(this)">Claude</button><button class="choice-btn" type="button" data-mcp-client="chatgpt" onclick="showMcpClient(this)">ChatGPT</button><button class="choice-btn" type="button" data-mcp-client="copilot" onclick="showMcpClient(this)">Copilot</button><button class="choice-btn" type="button" data-mcp-client="blender" onclick="showMcpClient(this)">BLENDer</button></div>
+      <div class="mcp-shot" data-mcp-shot="claude" hidden>
+        <a class="shot" href="images/mcp-clients/claude.webp" target="_blank" rel="noopener"><img src="images/mcp-clients/claude.webp" alt="Tableau MCP in Claude" loading="lazy"><span class="shot-hint">⤢ Click to enlarge</span></a>
+      </div>
+      <div class="mcp-shot" data-mcp-shot="chatgpt" hidden>
+        <a class="shot" href="images/mcp-clients/chatgpt.webp" target="_blank" rel="noopener"><img src="images/mcp-clients/chatgpt.webp" alt="Tableau MCP in ChatGPT" loading="lazy"><span class="shot-hint">⤢ Click to enlarge</span></a>
+      </div>
+      <div class="mcp-shot" data-mcp-shot="copilot" hidden>
+        <a class="shot" href="images/mcp-clients/copilot.webp" target="_blank" rel="noopener"><img src="images/mcp-clients/copilot.webp" alt="Tableau MCP in Copilot" loading="lazy"><span class="shot-hint">⤢ Click to enlarge</span></a>
+      </div>
+      <div class="mcp-shot" data-mcp-shot="blender" hidden>
+        <a class="shot" href="images/mcp-clients/blender.webp" target="_blank" rel="noopener"><img src="images/mcp-clients/blender.webp" alt="Tableau MCP in BLENDer" loading="lazy"><span class="shot-hint">⤢ Click to enlarge</span></a>
+      </div>
+    </div>
+
+    <p class="animate-in" style="margin-bottom:20px; line-height:1.8;">
+      In this section you'll get to grips with Tableau MCP, using Blender, our very own AI Assistant. It works just like Claude, with some guardrails, so let's get to see just what Tableau MCP is capable of.
+    </p>
+
+    <div class="setup-stepper animate-in" id="blenderStepper">
+      <div class="stepper-head">
+        <span>Step <strong class="stepper-current">1</strong> of <span class="stepper-total">2</span></span>
+        <div class="stepper-progress"><div class="stepper-bar"></div></div>
+        <span><strong class="stepper-done-count">0</strong> done</span>
+      </div>
+      <div class="stepper-window">
+      <div class="setup-step active" data-step="1">
+        <div class="step"><div class="step-num">1</div><div class="step-body"><h3>Log in to Blender</h3><p>Blender is our own AI assistant, built on Tableau MCP. Nothing to install and no account needed.</p></div></div>
+        <div class="step-instr"><div class="row"><span>Go to <a href="https://blender.demo.tableau.com/" target="_blank" rel="noopener"><code>blender.demo.tableau.com</code></a></span><button class="copy-btn" onclick="copyText(this,'https://blender.demo.tableau.com/')">copy</button></div><div class="row"><span>Event code: <code>TABLEAUXAI</code></span><button class="copy-btn" onclick="copyText(this,'TABLEAUXAI')">copy</button></div><div style="margin-top:6px;">Enter the event code and click <strong>Got it!</strong> on <strong>Keep it demo-safe</strong>. Hit <strong>Let's viz →</strong></div></div>
+        <a class="shot" href="images/blender/step-01.webp" target="_blank" rel="noopener"><img src="images/blender/step-01.webp" alt="Blender sign-in page with the TABLEAUXAI event code" loading="lazy"><span class="shot-hint">⤢ Click to enlarge</span></a>
+      </div>
+      <div class="setup-step" data-step="2">
+        <div class="step"><div class="step-num">2</div><div class="step-body"><h3>You're connected. Let's explore!</h3><p>BLENDer is already connected to hot-tableauxai via Tableau MCP.</p></div></div>
+        <div class="step-instr">We're now connected to BLENDer! The top bar shows <strong>Tableau Cloud / HOT Tableau XAI</strong>. BLENDer is an AI assistant powered by Claude Sonnet 5.5</div>
+        <a class="shot" href="images/blender/step-02.webp" target="_blank" rel="noopener"><img src="images/blender/step-02.webp" alt="Blender connected to hot-tableauxai via Tableau MCP" loading="lazy"><span class="shot-hint">⤢ Click to enlarge</span></a>
+      </div>
+      </div>
+      <div class="stepper-complete">✓ You're connected to Blender. Now let's see what Tableau MCP can do.<button class="stepper-reset">Start over</button></div>
+      <div class="stepper-controls">
+        <button class="stepper-btn stepper-prev" aria-label="Previous step">◂ Prev</button>
+        <button class="stepper-btn stepper-next" aria-label="Next step">Next ▸</button>
+      </div>
+    </div>
+
+    <div class="spacer"></div>
+    <div class="card animate-in">
+      <h3>Let's see what Tableau MCP can do</h3>
+      <p style="font-size:13px; margin:8px 0 0;">Tableau MCP exposes Tableau's APIs as tools that an AI client such as this can call. The LLM decides which tools to call, and the server just executes them.</p>
+      <p style="font-size:13px; margin:8px 0 0;">To see what it's capable of let's ask Blender!</p>
+      <div class="prompt-row" style="margin:6px 0;"><p class="q-text">What can you do for me through the Tableau MCP? Group your tools by what they're for, then suggest three things I could try with the data sources in the Tableau x AI Workshop project.</p><button class="copy-btn" onclick="copyText(this, this.closest('.prompt-row').querySelector('.q-text').innerText)">copy</button></div>
+      <p class="q-hint">Choose one of the suggestions, or choose your own!</p>
+    </div>
+
+    <div class="spacer"></div>
+    <h2 class="animate-in">Let's build a Data App</h2>
+    <div class="tabs animate-in" data-tabgroup="da">
+      <button class="tab active" data-tab="da-banking">Finance</button>
+      <button class="tab" data-tab="da-retail">Retail</button>
+      <button class="tab" data-tab="da-telco">Telco</button>
+      <button class="tab" data-tab="da-energy">Energy</button>
+      <button class="tab" data-tab="da-healthcare">Healthcare</button>
+    </div>
+
+    <div class="tab-panel active" id="da-banking">
+      <div class="q-card">
+        <div class="q-level l1">1 · Vibe-code the dashboard</div>
+        <div class="prompt-row" style="margin:6px 0;"><p class="q-text">Using the Tableau MCP and the certified Retail Banking Performance data source, vibe-code a one-page dashboard as an HTML artifact: KPI tiles for applications, approval rate (approved ÷ applications) and risk-adjusted profit so far in the latest month against the same days in the month before; a weekly applications trend for the latest 13 weeks; and risk-adjusted profit by product. Use real numbers from the data source, and open with a one-line headline that says what's happening.</p><button class="copy-btn" onclick="copyText(this, this.closest('.prompt-row').querySelector('.q-text').innerText)">copy</button></div>
+        <p class="q-hint">Then make it yours, one sentence at a time: "make the trend a bar chart", "highlight anything below the month before", "use our brand colours".</p>
+      </div>
+      <div class="q-card">
+        <div class="q-level l2">2 · Publish it to Tableau</div>
+        <div class="prompt-row" style="margin:6px 0;"><p class="q-text">Now turn this into a Tableau data app.</p><button class="copy-btn" onclick="copyText(this, this.closest('.prompt-row').querySelector('.q-text').innerText)">copy</button></div>
+        <div class="tip-box da-strap">What? You can take a vibe-coded HTML dashboard and simply publish this to Tableau? YES, now you can. With Tableau Data Apps it becomes a published, governed asset in Tableau Cloud, manageable like any other.</div>
+      </div>
+      <div class="q-card">
+        <div class="q-level l3">3 · View it in Tableau</div>
+        <p style="font-size:13px; margin:6px 0 10px;"><strong>Open in Tableau</strong><br>Review your Data App, published and governed in Tableau Cloud. Open the link Blender gives you, or find your Data App by name on the site:</p>
+        <a class="dash-card da-open" href="https://prod-uswest-c.online.tableau.com/#/site/hot-tableauxai/workbooks" target="_blank" rel="noopener">
+          <div class="dash-icon">☁️</div>
+          <div><div class="dash-title">Open Tableau Cloud ↗</div><div class="dash-sub">HOT Tableau XAI · All workbooks</div></div>
+        </a>
+        <ul class="da-notes" style="margin-top:12px;">
+          <li>Look at it as Tableau content. It has an <strong>owner</strong>, lives in a <strong>project</strong> and follows that project's <strong>permissions</strong>. Its <strong>Data Sources</strong> tab shows the certified data source it queries.</li>
+          <li>Treat it like any other view: favourite it, share it, subscribe to it.</li>
+          <li>When the data source refreshes, the app shows the new numbers the next time it opens. Nothing needs re-exporting or re-publishing.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tab-panel" id="da-retail">
+      <div class="q-card">
+        <div class="q-level l1">1 · Vibe-code the dashboard</div>
+        <div class="prompt-row" style="margin:6px 0;"><p class="q-text">Using the Tableau MCP and the certified Retail Sales Performance data source, vibe-code a one-page dashboard as an HTML artifact: KPI tiles for net sales, gross margin % (gross margin ÷ net sales) and units sold so far in the latest month against the same days in the month before; a weekly net sales trend for the latest 13 weeks; and gross margin % by state. Use real numbers from the data source, and open with a one-line headline that says what's happening.</p><button class="copy-btn" onclick="copyText(this, this.closest('.prompt-row').querySelector('.q-text').innerText)">copy</button></div>
+        <p class="q-hint">Then make it yours, one sentence at a time: "make the trend a bar chart", "highlight anything below the month before", "use our brand colours".</p>
+      </div>
+      <div class="q-card">
+        <div class="q-level l2">2 · Publish it to Tableau</div>
+        <div class="prompt-row" style="margin:6px 0;"><p class="q-text">Now turn this into a Tableau data app.</p><button class="copy-btn" onclick="copyText(this, this.closest('.prompt-row').querySelector('.q-text').innerText)">copy</button></div>
+        <div class="tip-box da-strap">What? You can take a vibe-coded HTML dashboard and simply publish this to Tableau? YES, now you can. With Tableau Data Apps it becomes a published, governed asset in Tableau Cloud, manageable like any other.</div>
+      </div>
+      <div class="q-card">
+        <div class="q-level l3">3 · View it in Tableau</div>
+        <p style="font-size:13px; margin:6px 0 10px;"><strong>Open in Tableau</strong><br>Review your Data App, published and governed in Tableau Cloud. Open the link Blender gives you, or find your Data App by name on the site:</p>
+        <a class="dash-card da-open" href="https://prod-uswest-c.online.tableau.com/#/site/hot-tableauxai/workbooks" target="_blank" rel="noopener">
+          <div class="dash-icon">☁️</div>
+          <div><div class="dash-title">Open Tableau Cloud ↗</div><div class="dash-sub">HOT Tableau XAI · All workbooks</div></div>
+        </a>
+        <ul class="da-notes" style="margin-top:12px;">
+          <li>Look at it as Tableau content. It has an <strong>owner</strong>, lives in a <strong>project</strong> and follows that project's <strong>permissions</strong>. Its <strong>Data Sources</strong> tab shows the certified data source it queries.</li>
+          <li>Treat it like any other view: favourite it, share it, subscribe to it.</li>
+          <li>When the data source refreshes, the app shows the new numbers the next time it opens. Nothing needs re-exporting or re-publishing.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tab-panel" id="da-telco">
+      <div class="q-card">
+        <div class="q-level l1">1 · Vibe-code the dashboard</div>
+        <div class="prompt-row" style="margin:6px 0;"><p class="q-text">Using the Tableau MCP and the certified Telecommunications Service Performance data source, vibe-code a one-page dashboard as an HTML artifact: KPI tiles for net adds, complaints and average network latency so far in the latest month against the same days in the month before; weekly net adds by service for the latest 13 weeks; and complaints by region. Use real numbers from the data source, and open with a one-line headline that says what's happening.</p><button class="copy-btn" onclick="copyText(this, this.closest('.prompt-row').querySelector('.q-text').innerText)">copy</button></div>
+        <p class="q-hint">Then make it yours, one sentence at a time: "make the trend a bar chart", "highlight anything below the month before", "use our brand colours".</p>
+      </div>
+      <div class="q-card">
+        <div class="q-level l2">2 · Publish it to Tableau</div>
+        <div class="prompt-row" style="margin:6px 0;"><p class="q-text">Now turn this into a Tableau data app.</p><button class="copy-btn" onclick="copyText(this, this.closest('.prompt-row').querySelector('.q-text').innerText)">copy</button></div>
+        <div class="tip-box da-strap">What? You can take a vibe-coded HTML dashboard and simply publish this to Tableau? YES, now you can. With Tableau Data Apps it becomes a published, governed asset in Tableau Cloud, manageable like any other.</div>
+      </div>
+      <div class="q-card">
+        <div class="q-level l3">3 · View it in Tableau</div>
+        <p style="font-size:13px; margin:6px 0 10px;"><strong>Open in Tableau</strong><br>Review your Data App, published and governed in Tableau Cloud. Open the link Blender gives you, or find your Data App by name on the site:</p>
+        <a class="dash-card da-open" href="https://prod-uswest-c.online.tableau.com/#/site/hot-tableauxai/workbooks" target="_blank" rel="noopener">
+          <div class="dash-icon">☁️</div>
+          <div><div class="dash-title">Open Tableau Cloud ↗</div><div class="dash-sub">HOT Tableau XAI · All workbooks</div></div>
+        </a>
+        <ul class="da-notes" style="margin-top:12px;">
+          <li>Look at it as Tableau content. It has an <strong>owner</strong>, lives in a <strong>project</strong> and follows that project's <strong>permissions</strong>. Its <strong>Data Sources</strong> tab shows the certified data source it queries.</li>
+          <li>Treat it like any other view: favourite it, share it, subscribe to it.</li>
+          <li>When the data source refreshes, the app shows the new numbers the next time it opens. Nothing needs re-exporting or re-publishing.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tab-panel" id="da-energy">
+      <div class="q-card">
+        <div class="q-level l1">1 · Vibe-code the dashboard</div>
+        <div class="prompt-row" style="margin:6px 0;"><p class="q-text">Using the Tableau MCP and the certified Energy Generation Portfolio data source, vibe-code a one-page dashboard as an HTML artifact: KPI tiles for generation (MWh), market revenue and average spot price so far in the latest month against the same days in the month before; the weekly average spot price for the latest 13 weeks; and generation by fuel source. Use real numbers from the data source, and open with a one-line headline that says what's happening.</p><button class="copy-btn" onclick="copyText(this, this.closest('.prompt-row').querySelector('.q-text').innerText)">copy</button></div>
+        <p class="q-hint">Then make it yours, one sentence at a time: "make the trend a bar chart", "highlight anything below the month before", "use our brand colours".</p>
+      </div>
+      <div class="q-card">
+        <div class="q-level l2">2 · Publish it to Tableau</div>
+        <div class="prompt-row" style="margin:6px 0;"><p class="q-text">Now turn this into a Tableau data app.</p><button class="copy-btn" onclick="copyText(this, this.closest('.prompt-row').querySelector('.q-text').innerText)">copy</button></div>
+        <div class="tip-box da-strap">What? You can take a vibe-coded HTML dashboard and simply publish this to Tableau? YES, now you can. With Tableau Data Apps it becomes a published, governed asset in Tableau Cloud, manageable like any other.</div>
+      </div>
+      <div class="q-card">
+        <div class="q-level l3">3 · View it in Tableau</div>
+        <p style="font-size:13px; margin:6px 0 10px;"><strong>Open in Tableau</strong><br>Review your Data App, published and governed in Tableau Cloud. Open the link Blender gives you, or find your Data App by name on the site:</p>
+        <a class="dash-card da-open" href="https://prod-uswest-c.online.tableau.com/#/site/hot-tableauxai/workbooks" target="_blank" rel="noopener">
+          <div class="dash-icon">☁️</div>
+          <div><div class="dash-title">Open Tableau Cloud ↗</div><div class="dash-sub">HOT Tableau XAI · All workbooks</div></div>
+        </a>
+        <ul class="da-notes" style="margin-top:12px;">
+          <li>Look at it as Tableau content. It has an <strong>owner</strong>, lives in a <strong>project</strong> and follows that project's <strong>permissions</strong>. Its <strong>Data Sources</strong> tab shows the certified data source it queries.</li>
+          <li>Treat it like any other view: favourite it, share it, subscribe to it.</li>
+          <li>When the data source refreshes, the app shows the new numbers the next time it opens. Nothing needs re-exporting or re-publishing.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tab-panel" id="da-healthcare">
+      <div class="q-card">
+        <div class="q-level l1">1 · Vibe-code the dashboard</div>
+        <div class="prompt-row" style="margin:6px 0;"><p class="q-text">Using the Tableau MCP and the certified Hospital Network Performance data source, vibe-code a one-page dashboard as an HTML artifact: KPI tiles for admissions, staff cost and agency share of nursing hours (agency ÷ nursing hours) so far in the latest month against the same days in the month before; weekly admissions for the latest 13 weeks; and agency share by hospital. Use real numbers from the data source, and open with a one-line headline that says what's happening.</p><button class="copy-btn" onclick="copyText(this, this.closest('.prompt-row').querySelector('.q-text').innerText)">copy</button></div>
+        <p class="q-hint">Then make it yours, one sentence at a time: "make the trend a bar chart", "highlight anything below the month before", "use our brand colours".</p>
+      </div>
+      <div class="q-card">
+        <div class="q-level l2">2 · Publish it to Tableau</div>
+        <div class="prompt-row" style="margin:6px 0;"><p class="q-text">Now turn this into a Tableau data app.</p><button class="copy-btn" onclick="copyText(this, this.closest('.prompt-row').querySelector('.q-text').innerText)">copy</button></div>
+        <div class="tip-box da-strap">What? You can take a vibe-coded HTML dashboard and simply publish this to Tableau? YES, now you can. With Tableau Data Apps it becomes a published, governed asset in Tableau Cloud, manageable like any other.</div>
+      </div>
+      <div class="q-card">
+        <div class="q-level l3">3 · View it in Tableau</div>
+        <p style="font-size:13px; margin:6px 0 10px;"><strong>Open in Tableau</strong><br>Review your Data App, published and governed in Tableau Cloud. Open the link Blender gives you, or find your Data App by name on the site:</p>
+        <a class="dash-card da-open" href="https://prod-uswest-c.online.tableau.com/#/site/hot-tableauxai/workbooks" target="_blank" rel="noopener">
+          <div class="dash-icon">☁️</div>
+          <div><div class="dash-title">Open Tableau Cloud ↗</div><div class="dash-sub">HOT Tableau XAI · All workbooks</div></div>
+        </a>
+        <ul class="da-notes" style="margin-top:12px;">
+          <li>Look at it as Tableau content. It has an <strong>owner</strong>, lives in a <strong>project</strong> and follows that project's <strong>permissions</strong>. Its <strong>Data Sources</strong> tab shows the certified data source it queries.</li>
+          <li>Treat it like any other view: favourite it, share it, subscribe to it.</li>
+          <li>When the data source refreshes, the app shows the new numbers the next time it opens. Nothing needs re-exporting or re-publishing.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== PAGE 5: STUDIO SETUP (HOT PASS + STUDIO ACTIVATION) ========== -->
+<section class="page" data-page="5">
+  <div class="content-area">
+    <div class="section-tag animate-in">Setup</div>
+    <h2 class="animate-in">Studio Setup — HOT Pass &amp; Tableau Studio</h2>
+    <p class="animate-in" style="margin-bottom:12px; line-height:1.8;">
+      Connect to your Hot Pass workspace and activate Tableau Studio. Click <strong>Next</strong> after each step to move on.
+    </p>
+
+    <h3 class="animate-in kn-sub">Part 1 — Connect to the Cloud Workspace</h3>
+
+    <div class="setup-stepper animate-in" id="hotStepper">
+      <div class="stepper-head">
+        <span>Step <strong class="stepper-current">1</strong> of <span class="stepper-total">4</span></span>
+        <div class="stepper-progress"><div class="stepper-bar"></div></div>
+        <span><strong class="stepper-done-count">0</strong> done</span>
+      </div>
+      <div class="stepper-window">
+      <div class="setup-step active" data-step="1">
+        <div class="step"><div class="step-num">1</div><div class="step-body"><h3>Get your Hot Pass</h3><p>You already have your Hot Pass from Part 1, so just reopen it. For this setup you only need the Cloud Workspace. Keep your Tableau Cloud login handy: Claude uses it to sign in to Tableau.</p></div></div>
+        <div class="step-instr"><div class="row"><span>Go to <a href="https://hotpass.demo.tableau.com" target="_blank" rel="noopener"><code>hotpass.demo.tableau.com</code></a></span><button class="copy-btn" onclick="copyText(this,'hotpass.demo.tableau.com')">copy</button></div><div class="row"><span>Event code: <code>TABLEAUXAI</code></span><button class="copy-btn" onclick="copyText(this,'TABLEAUXAI')">copy</button></div><div class="row"><span>Email: <code>you@example.com</code> <span class="dim">(use your own)</span></span></div><div class="row"><span>Click <strong>GET MY ACCESS →</strong></span></div></div>
+        <a class="shot" href="images/headless/step-01.webp" target="_blank" rel="noopener"><img src="images/headless/step-01.webp" alt="Hot Pass page with Email and Event Code fields" loading="lazy"><span class="shot-hint">⤢ Click to enlarge</span></a>
+      </div>
+      <div class="setup-step" data-step="2">
+        <div class="step"><div class="step-num">2</div><div class="step-body"><h3>Open your Cloud Workspace</h3><p>Your Hot Pass lists everything you've been given. For this setup you only need the Cloud Workspace.</p></div></div>
+        <div class="step-instr">In the <strong>CLOUD WORKSPACE</strong> panel, click <strong>Open your Workspace →</strong></div>
+        <a class="shot" href="images/headless/step-02.webp" target="_blank" rel="noopener"><img src="images/headless/step-02.webp" alt="Hot Pass access page with Tableau Cloud and Cloud Workspace panels" loading="lazy"><span class="shot-hint">⤢ Click to enlarge</span></a>
+      </div>
+      <div class="setup-step" data-step="3">
+        <div class="step"><div class="step-num">3</div><div class="step-body"><h3>Launch the Windows desktop</h3><p>The workspace opens as an Amazon WorkSpaces streaming session and asks which application to start.</p></div></div>
+        <div class="step-instr">Select <strong>Desktop</strong>. The Workspace will take a few minutes to become available.</div>
+        <a class="shot" href="images/headless/step-03.webp" target="_blank" rel="noopener"><img src="images/headless/step-03.webp" alt="Amazon WorkSpaces application picker with Desktop as the first option" loading="lazy"><span class="shot-hint">⤢ Click to enlarge</span></a>
+      </div>
+      <div class="setup-step" data-step="4">
+        <div class="step"><div class="step-num">4</div><div class="step-body"><h3>You are now logged into the VM</h3><p>You should see the Windows desktop with Claude Desktop, Google Chrome and Tableau Studio shortcuts.</p></div></div>
+        <a class="shot" href="images/headless/step-04-vm.webp" target="_blank" rel="noopener"><img src="images/headless/step-04-vm.webp" alt="The workspace's Windows desktop with Claude Desktop, Google Chrome and Tableau Studio shortcuts" loading="lazy"><span class="shot-hint">⤢ Click to enlarge</span></a>
+        <div class="step-instr" style="margin-top:10px;"><strong>ONLY when you've finished the workshop:</strong> Close the browser tab or window your workspace is running in, or click <strong>Profile</strong> in the workspace toolbar and choose <strong>End session</strong>. There's no need to shut down or restart Windows.</div>
+      </div>
+      </div>
+      <div class="stepper-complete">✓ You're logged in to the VM. Now let's set up Tableau Studio.<button class="stepper-reset">Start over</button></div>
+      <div class="stepper-controls">
+        <button class="stepper-btn stepper-prev" aria-label="Previous step">◂ Prev</button>
+        <button class="stepper-btn stepper-next" aria-label="Next step">Next ▸</button>
+      </div>
+    </div>
+
+    <div class="spacer"></div>
+    <h3 class="animate-in kn-sub">Part 2 — Activate Tableau Studio</h3>
+
+    <div class="setup-stepper animate-in" id="studioStepper">
+      <div class="stepper-head">
+        <span>Step <strong class="stepper-current">1</strong> of <span class="stepper-total">8</span></span>
+        <div class="stepper-progress"><div class="stepper-bar"></div></div>
+        <span><strong class="stepper-done-count">0</strong> done</span>
+      </div>
+      <div class="stepper-window">
+      <div class="setup-step active" data-step="1">
+        <div class="step"><div class="step-num">1</div><div class="step-body"><h3>Open Tableau Studio</h3><p>The workspace includes a pre-release copy of Tableau Desktop, labelled Tableau Studio.</p></div></div>
+        <div class="step-instr">Double-click <strong>Tableau Studio</strong> from the desktop</div>
+        <a class="shot" href="images/studio-setup/step-01.webp" target="_blank" rel="noopener"><img src="images/studio-setup/step-01.webp" alt="Windows desktop with the Tableau Studio icon" loading="lazy"><span class="shot-hint">⤢ Click to enlarge</span></a>
+      </div>
+      <div class="setup-step" data-step="2">
+        <div class="step"><div class="step-num">2</div><div class="step-body"><h3>Activate Tableau</h3><p>The first time it opens, Tableau asks how you want to license it.</p></div></div>
+        <div class="step-instr">Select <strong>Activate by signing in to a server</strong></div>
+        <a class="shot" href="images/studio-setup/step-02.webp" target="_blank" rel="noopener"><img src="images/studio-setup/step-02.webp" alt="Activate Tableau dialog" loading="lazy"><span class="shot-hint">⤢ Click to enlarge</span></a>
+      </div>
+      <div class="setup-step" data-step="3">
+        <div class="step"><div class="step-num">3</div><div class="step-body"><h3>Sign in to Tableau Cloud</h3><p>Your Tableau Cloud login activates the licence.</p></div></div>
+        <div class="step-instr"><div class="row"><span>Server: <code>https://prod-uswest-c.online.tableau.com/</code></span><button class="copy-btn" onclick="copyText(this,'https://prod-uswest-c.online.tableau.com/')">copy</button></div><div class="row"><span>Activate by signing in to the Tableau Cloud site <strong>hot-tableauxai</strong>. Use the URL provided – not the Quick Connect.</span></div></div>
+        <a class="shot" href="images/studio-setup/step-03.webp" target="_blank" rel="noopener"><img src="images/studio-setup/step-03.webp" alt="Tableau Server Sign In dialog" loading="lazy"><span class="shot-hint">⤢ Click to enlarge</span></a>
+        <div class="step-instr">If you are having difficulty pasting to the remote session use the clipboard at the top of the screen to paste to the remote machine and use the right mouse button to paste its contents (rather than using ctrl-V)</div>
+      </div>
+      <div class="setup-step" data-step="4">
+        <div class="step"><div class="step-num">4</div><div class="step-body"><h3>Enter your username and choose the site if prompted</h3><p>Tableau Cloud will prompt if you have access to more than one site</p></div></div>
+        <div class="step-instr"><div class="row"><span>Enter the URI <code>hot-tableauxai</code></span><button class="copy-btn" onclick="copyText(this,'hot-tableauxai')">copy</button></div></div>
+        <a class="shot" href="images/studio-setup/step-04.webp" target="_blank" rel="noopener"><img src="images/studio-setup/step-04.webp" alt="Sign in page with URI hot-tableauxai" loading="lazy"><span class="shot-hint">⤢ Click to enlarge</span></a>
+      </div>
+      <div class="setup-step" data-step="5">
+        <div class="step"><div class="step-num">5</div><div class="step-body"><h3>Activated</h3><p>Tableau is now licensed through your Tableau Cloud account.</p></div></div>
+        <div class="step-instr">Tableau Studio activated! <strong>Continue</strong> and Register your details</div>
+        <a class="shot" href="images/studio-setup/step-05.webp" target="_blank" rel="noopener"><img src="images/studio-setup/step-05.webp" alt="Activation dialog confirming success" loading="lazy"><span class="shot-hint">⤢ Click to enlarge</span></a>
+      </div>
+      <div class="setup-step" data-step="6">
+        <div class="step"><div class="step-num">6</div><div class="step-body"><h3>Open Tableau Agent</h3><p>Tableau Agent lives in a panel on the right of the authoring window.</p></div></div>
+        <div class="step-instr">Click on the <strong>White Tableau Logo</strong> top left to Open Authoring Mode. Open <strong>Tableau Agent</strong> from the rectangular speech bubble top right</div>
+        <a class="shot" href="images/studio-setup/step-06.webp" target="_blank" rel="noopener"><img src="images/studio-setup/step-06.webp" alt="Tableau authoring window with Tableau Agent panel" loading="lazy"><span class="shot-hint">⤢ Click to enlarge</span></a>
+      </div>
+      <div class="setup-step" data-step="7">
+        <div class="step"><div class="step-num">7</div><div class="step-body"><h3>Install the Claude Agent SDK</h3><p>Tableau Agent runs on the Claude Agent SDK. This happens once and may take a minute.</p></div></div>
+        <div class="step-instr"><strong>Proceed</strong> to install the Claude Agent SDK. Confirm <strong>Got it!</strong></div>
+        <a class="shot" href="images/studio-setup/step-07.webp" target="_blank" rel="noopener"><img src="images/studio-setup/step-07.webp" alt="Tableau Agent panel installing Claude Agent SDK" loading="lazy"><span class="shot-hint">⤢ Click to enlarge</span></a>
+      </div>
+      <div class="setup-step" data-step="8">
+        <div class="step"><div class="step-num">8</div><div class="step-body"><h3>Run a quick test</h3><p>Check that Tableau Agent can build a viz for you.</p></div></div>
+        <div class="step-instr"><div class="row"><span>Connect to the saved data source <strong>Sample - Superstore</strong> and ask Agent <em>"Show me the Sales by Category"</em></span><button class="copy-btn" onclick="copyText(this,'Show me the Sales by Category')">copy</button></div></div>
+        <a class="shot" href="images/studio-setup/step-08.webp" target="_blank" rel="noopener"><img src="images/studio-setup/step-08.webp" alt="Tableau Agent answering with a bar chart of Sales by Category" loading="lazy"><span class="shot-hint">⤢ Click to enlarge</span></a>
+      </div>
+      </div>
+      <div class="stepper-complete">✓ Tableau Studio is activated and Tableau Agent is ready. Next up: Tableau Studio exercises.<button class="stepper-reset">Start over</button></div>
+      <div class="stepper-controls">
+        <button class="stepper-btn stepper-prev" aria-label="Previous step">◂ Prev</button>
+        <button class="stepper-btn stepper-next" aria-label="Next step">Next ▸</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== PAGE 6: TABLEAU STUDIO ========== -->
+<section class="page" data-page="6">
+  <div class="content-area">
     <div class="section-tag animate-in">Hands-on</div>
     <h2 class="animate-in">Tableau Studio</h2>
-    <p class="animate-in dim">This section will be built next — Studio exercises and content.</p>
+    <p class="animate-in" style="margin-bottom:20px; line-height:1.8;">
+      Tableau Studio lets you vibe-code with your data. Describe what you want in plain language, watch Tableau Agent build it, then refine it one sentence at a time. Because it works on a published data source, everything it builds is a real Tableau asset: governed, editable and built with your own permissions. Start with the guided walkthrough, which goes from insight to data app on one shared data source. Then take on the challenge with your own dataset.
+    </p>
+
+    <!-- Part 1: guided walkthrough -->
+    <h3 class="animate-in" style="margin:4px 0 12px;">Part 1 · Guided walkthrough</h3>
+    <div class="card animate-in">
+      <p style="font-size:13px; margin:0;">Data source: <strong>Homestead Hardware Sales</strong>. Work through the seven exercises in order, since each one builds on the last. Copy each prompt into Tableau Agent, then click <span class="sky bold">Show expected result</span> to check your work.</p>
+    </div>
+    <div class="spacer"></div>
+    <div class="animate-in">
+      <div class="q-card">
+        <div class="q-level l1">1 · Getting started</div>
+        <p style="font-size:13px; margin:8px 0;">On the Start page (click on the <strong>Tableau</strong> icon top left if required), in the <strong>Connect</strong> pane on the left, click <strong>Tableau Server</strong>. You are connected to site <code>hot-tableauxai</code> – select <strong>Homestead Hardware Sales</strong>, and click <strong>Connect</strong>.</p>
+        <a class="shot" href="images/studio/connect-tableau-server.png" target="_blank" rel="noopener" style="max-width:220px; margin:8px 0 12px;"><img src="images/studio/connect-tableau-server.png" alt="Tableau Studio Connect pane, with Tableau Server under Search for Data" loading="lazy"></a>
+        <p style="font-size:13px; margin:8px 0;">Open <strong>Tableau Agent</strong> from the speech-bubble icon top right, or from <strong>Extensions → Tableau Agent</strong>. The Agent panel opens on the right.</p>
+      </div>
+      <div class="q-card">
+        <div class="q-level l2">2 · Discover insights</div>
+        <p style="font-size:13px; margin:8px 0;">Before you touch a single pill, <strong>Reveal Statistical Insights</strong> cards appear at the bottom of Sheet 1. If you don't see them, ask the agent:</p>
+        <div class="prompt-row" style="margin-top:12px;"><p class="q-text">run insights service</p><button class="copy-btn" onclick="copyText(this, this.closest('.prompt-row').querySelector('.q-text').innerText)">copy</button></div>
+        <button class="reveal-trigger" onclick="toggleReveal(this)">Show expected result <span class="arrow">▶</span></button>
+        <div class="reveal-content"><div class="reveal-inner">Tableau Agent runs the insight service on <strong>Net Sales</strong> over Order Date, by month. The card shows <strong>425.0K, up 189.8% vs the prior period</strong> (1–10 Aug 2026), then:<ul style="margin:6px 0 0 18px;"><li><strong>Trend Change Insight</strong>: Net Sales has a flat trend with fluctuations, starting 16 Jul 2026.</li><li><strong>Unusual Change</strong>: Net Sales on 10 Aug 2026 was 29.9K, below the expected range of 33.0K–65.5K given seasonal patterns.</li></ul></div></div>
+        <p style="font-size:13px; margin:12px 0 0;">Click <strong>Visualize Insight</strong> on the Trend Change or Unusual Change insight.</p>
+        <button class="reveal-trigger" onclick="toggleReveal(this)">Show expected result <span class="arrow">▶</span></button>
+        <div class="reveal-content"><div class="reveal-inner">Tableau Agent turns the insight into a real, editable worksheet, built from the governed source with your own permissions and row-level security. No exports, no side spreadsheets.</div></div>
+        <p style="font-size:13px; margin:12px 0 0;">Click <strong>Create KPI</strong> on the Net Sales card.</p>
+        <button class="reveal-trigger" onclick="toggleReveal(this)">Show expected result <span class="arrow">▶</span></button>
+        <div class="reveal-content"><div class="reveal-inner">The agent works through <em>Preparing visualization → Authoring visualization in Tableau → Verifying visualization</em>, with a green tick for each, and adds a Net Sales KPI tile as a new sheet.</div></div>
+      </div>
+      <div class="q-card">
+        <div class="q-level l3">3 · Build a native Tableau asset</div>
+        <p class="q-hint" style="margin:0 0 4px;">Net sales are up, but "up" isn't a story yet. Which product family is actually carrying it?</p>
+        <div class="prompt-row" style="margin-top:12px;"><p class="q-text">Build a bar of Net Sales by Product Family, sorted descending.</p><button class="copy-btn" onclick="copyText(this, this.closest('.prompt-row').querySelector('.q-text').innerText)">copy</button></div>
+        <button class="reveal-trigger" onclick="toggleReveal(this)">Show expected result <span class="arrow">▶</span></button>
+        <div class="reveal-content"><div class="reveal-inner">A new worksheet with a descending bar chart. <strong>HVAC</strong>, not lumber, is the largest product family by net sales, and it's not close, ahead of Appliances and Doors &amp; Windows. Click the HVAC bar to see its value in the tooltip.</div></div>
+      </div>
+      <div class="q-card">
+        <div class="q-level l1">4 · Analytical judgment</div>
+        <p class="q-hint" style="margin:0 0 4px;">If HVAC is the story, you want to know <em>where</em>. Your first instinct might be a pie chart by state. See what happens.</p>
+        <div class="prompt-row" style="margin-top:12px;"><p class="q-text">Show me Net Sales by Store State as an exploding pie chart.</p><button class="copy-btn" onclick="copyText(this, this.closest('.prompt-row').querySelector('.q-text').innerText)">copy</button></div>
+        <button class="reveal-trigger" onclick="toggleReveal(this)">Show expected result <span class="arrow">▶</span></button>
+        <div class="reveal-content"><div class="reveal-inner">Tableau Agent understands best practice! It explains an exploded pie chart would not be a suitable option and reverts to a more suitable format. The agent doesn't fake a feature Tableau doesn't have. It tells you what it changed and suggests a better chart.</div></div>
+        <div class="prompt-row" style="margin-top:12px;"><p class="q-text">Put Net Sales by Store State on a filled map.</p><button class="copy-btn" onclick="copyText(this, this.closest('.prompt-row').querySelector('.q-text').innerText)">copy</button></div>
+        <button class="reveal-trigger" onclick="toggleReveal(this)">Show expected result <span class="arrow">▶</span></button>
+        <div class="reveal-content"><div class="reveal-inner">A filled map of Australia. The agent adds Store Country (Australia) so Tableau can place all 8 states. <strong>VIC (4.6M), NSW (4.5M) and QLD (4.1M)</strong> are the darkest, and <strong>ACT (613K) and NT (772K)</strong> the lightest. The east coast carries the business.</div></div>
+        <p class="q-hint" style="margin-top:10px;"><strong>Tip:</strong> If a state shows up blank, tell the agent. Geocoding can take a few seconds.</p>
+      </div>
+      <div class="q-card">
+        <div class="q-level l3">5 · Author business logic</div>
+        <p class="q-hint" style="margin:0 0 4px;">Who's actually buying? Tier is blank when someone isn't enrolled, and Customer Active Flag is false when they've lapsed. You need one calculation to answer it cleanly.</p>
+        <div class="prompt-row" style="margin-top:12px;"><p class="q-text">Create a calculated field named Loyalty Tier: if Tier is blank or Customer Active Flag is false, label it Non-member, otherwise use Tier.</p><button class="copy-btn" onclick="copyText(this, this.closest('.prompt-row').querySelector('.q-text').innerText)">copy</button></div>
+        <button class="reveal-trigger" onclick="toggleReveal(this)">Show expected result <span class="arrow">▶</span></button>
+        <div class="reveal-content"><div class="reveal-inner">Tableau Agent authors and validates the calculation in Tableau, using its Calc Engine skill if it's active. Expect something like <code>IF ISNULL([Tier]) OR TRIM([Tier]) = '' OR NOT [Customer Active Flag] THEN "Non-member" ELSE [Tier] END</code>, and <strong>Loyalty Tier</strong> in the Data pane.</div></div>
+        <div class="prompt-row" style="margin-top:12px;"><p class="q-text">Build a bar of Net Sales by Loyalty Tier.</p><button class="copy-btn" onclick="copyText(this, this.closest('.prompt-row').querySelector('.q-text').innerText)">copy</button></div>
+        <button class="reveal-trigger" onclick="toggleReveal(this)">Show expected result <span class="arrow">▶</span></button>
+        <div class="reveal-content"><div class="reveal-inner">The largest revenue group isn't Platinum or Gold. It's <strong>Non-member</strong>, at roughly two-thirds of net sales, followed by Silver, Gold and Platinum.</div></div>
+        <div class="prompt-row" style="margin-top:12px;"><p class="q-text">Break that down by Product Family. Is Non-member share concentrated anywhere, or is it flat across categories?</p><button class="copy-btn" onclick="copyText(this, this.closest('.prompt-row').querySelector('.q-text').innerText)">copy</button></div>
+        <button class="reveal-trigger" onclick="toggleReveal(this)">Show expected result <span class="arrow">▶</span></button>
+        <div class="reveal-content"><div class="reveal-inner"><strong>It isn't concentrated anywhere.</strong> Non-member share runs from ~63% to ~69% in every product family, including HVAC, around a ~66% average. The loyalty programme captures about a third of revenue, uniformly across the business.</div></div>
+      </div>
+      <div class="q-card">
+        <div class="q-level l4">6 · Compose the Sales Cockpit</div>
+        <p class="q-hint" style="margin:0 0 4px;">Store Ops will ask this same question every Monday. Instead of answering it once, turn it into something the team can check themselves.</p>
+        <div class="prompt-row" style="margin-top:12px;"><p class="q-text">Build KPI tiles for total Net Sales, Orders, and Units, then compose a dashboard called Sales Cockpit with the KPIs across the top and the Store State map below.</p><button class="copy-btn" onclick="copyText(this, this.closest('.prompt-row').querySelector('.q-text').innerText)">copy</button></div>
+        <button class="reveal-trigger" onclick="toggleReveal(this)">Show expected result <span class="arrow">▶</span></button>
+        <div class="reveal-content"><div class="reveal-inner">Tableau Agent builds three KPI tiles (Orders as a distinct count of Order ID, Units as SUM(Quantity)), composes a <strong>Sales Cockpit</strong> dashboard with the KPIs across the top and the Store State map below. Net Sales is about 18.6M.</div></div>
+        <div class="prompt-row" style="margin-top:12px;"><p class="q-text">Make clicking a state filter the KPIs.</p><button class="copy-btn" onclick="copyText(this, this.closest('.prompt-row').querySelector('.q-text').innerText)">copy</button></div>
+        <button class="reveal-trigger" onclick="toggleReveal(this)">Show expected result <span class="arrow">▶</span></button>
+        <div class="reveal-content"><div class="reveal-inner">Click <strong>VIC</strong> on the map and the KPIs update to Victoria only (Net Sales about 4.6M). Click it again, or click an empty area, to clear the filter.</div></div>
+        <p class="q-hint" style="margin-top:10px;"><strong>Tip:</strong> Dashboard layout can be rough. Adjust container sizes, padding and positions just like any Tableau dashboard.</p>
+      </div>
+      <div class="q-card">
+        <div class="q-level l1">7 · Vibe-code the data app</div>
+        <p class="q-hint" style="margin:0 0 4px;">One question is still open: has HVAC always led, or did another product family ever overtake it? Watch the categories change rank over time.</p>
+        <div class="prompt-row" style="margin-top:12px;"><p class="q-text">Vibe-code an animated bar-chart race of Net Sales by Product Family across the months, Salesforce-styled, reading the governed dashboard data.</p><button class="copy-btn" onclick="copyText(this, this.closest('.prompt-row').querySelector('.q-text').innerText)">copy</button></div>
+        <button class="reveal-trigger" onclick="toggleReveal(this)">Show expected result <span class="arrow">▶</span></button>
+        <div class="reveal-content"><div class="reveal-inner">A bar-chart race isn't a native Tableau mark, so Tableau Agent builds it as a viz extension. It writes the HTML, CSS and JavaScript, embeds the app in a new sheet and reads the same data source through the Extensions API. Watch the product families change rank month by month.</div></div>
+        <p class="q-hint" style="margin-top:10px;"><strong>Tip:</strong> If the tile says Loading…, click <strong>Reload</strong> on the extension tile. If nothing renders after a couple of minutes, don't troubleshoot it. Move on to the challenge.</p>
+      </div>
+    </div>
+    <div class="tip-box animate-in">
+      <div class="tip-label">What you just built</div>
+      Statistical insights and a KPI, a native worksheet, a pie chart and a filled map, a reusable Loyalty Tier calculation, an interactive Sales Cockpit and a vibe-coded data app, all from one governed data source and built the same way whoever asks. Everyone can vibe-code now. Tableau Studio is where you vibe-code things people can believe.
+    </div>
+
+    <div class="spacer-lg"></div>
+
+    <!-- Part 2: the challenge -->
+    <h3 class="animate-in" style="margin:4px 0 12px;">Part 2 · The challenge</h3>
+    <div class="card animate-in">
+      <h3>Your dataset depends on your login</h3>
+      <p style="font-size:13px; margin:8px 0 16px;">As you logged into Tableau Cloud the administrator would have assigned you permissions for some fun projects. Only 1 or 2 of these will be available to you. Be lucky! Open Tableau Studio and connect to yours. Only your own dataset will open.</p>
+      <div class="two-col">
+        <a class="dash-card" href="https://prod-uswest-c.online.tableau.com/#/site/hot-tableauxai/projects/1872920" target="_blank">
+          <div class="dash-icon">🎵</div>
+          <div class="dash-title">Music Streaming Charts</div>
+          <div class="dash-sub">240 tracks · 6 regions · Oct 2024 – Sep 2026</div>
+          <div class="dash-user">Tableau x AI Music</div>
+        </a>
+        <a class="dash-card" href="https://prod-uswest-c.online.tableau.com/#/site/hot-tableauxai/projects/1872921" target="_blank">
+          <div class="dash-icon">🎬</div>
+          <div class="dash-title">Film Box Office</div>
+          <div class="dash-sub">3,000 films · 2005 – 2025 · 5 regions</div>
+          <div class="dash-user">Tableau x AI Film</div>
+        </a>
+        <a class="dash-card" href="https://prod-uswest-c.online.tableau.com/#/site/hot-tableauxai/projects/1872922" target="_blank">
+          <div class="dash-icon">⚽</div>
+          <div class="dash-title">Football League Matches</div>
+          <div class="dash-sub">5 fictional leagues · 8 seasons · 15,200 matches</div>
+          <div class="dash-user">Tableau x AI Football</div>
+        </a>
+        <a class="dash-card" href="https://prod-uswest-c.online.tableau.com/#/site/hot-tableauxai/projects/1872923" target="_blank">
+          <div class="dash-icon">🚗</div>
+          <div class="dash-title">Used Car Market</div>
+          <div class="dash-sub">30,000 listings · 22 makes · 2024 – 2025</div>
+          <div class="dash-user">Tableau x AI Cars</div>
+        </a>
+      </div>
+    </div>
+
+    <div class="spacer"></div>
+
+    <div class="card animate-in">
+      <h3>The challenge</h3>
+      <div class="discovery-seq" style="margin-top:14px;">
+        <div class="disc-step"><p><span class="bold sky">Vibe-code a dashboard.</span> Start with the prompt below, then make it yours: "make the trend a bar chart", "add a filter for region", "highlight the top 3".</p></div>
+        <div class="disc-step"><p><span class="bold sky">Turn detective.</span> Use Insights, or ask Studio what stands out, and then work through the insight hunt. Each dataset contains real patterns and a few genuine outliers.</p></div>
+        <div class="disc-step"><p><span class="bold sky">Prove it.</span> Every claim needs a number and a chart. Then present your best finding in a dashboard, or let Claude and the Tableau MCP write the data story.</p></div>
+      </div>
+    </div>
+
+    <div class="spacer"></div>
+    <div class="warn-box animate-in">
+      <strong>No peeking.</strong> Every hunt has a <span class="sky bold">Reveal insight</span> button, and you have to click it twice to see the answer. Try at least two prompts of your own before you reveal it.
+    </div>
+
+    <div class="spacer"></div>
+
+    <!-- Studio dataset tabs -->
+    <div class="tabs animate-in" data-tabgroup="studio">
+      <button class="tab active" data-tab="studio-music">Music</button>
+      <button class="tab" data-tab="studio-film">Film</button>
+      <button class="tab" data-tab="studio-sport">Sport</button>
+      <button class="tab" data-tab="studio-cars">Cars</button>
+    </div>
+
+    <!-- STUDIO: MUSIC -->
+    <div class="tab-panel active" id="studio-music">
+      <div class="q-card">
+        <div class="q-level l1">1 · Vibe-code</div>
+        <div class="prompt-row"><p class="q-text">Build me a music streaming dashboard: KPI tiles for streams, unique listeners, revenue and average skip rate; a monthly streams trend; the top 10 artists and tracks; and a genre-by-region heat map.</p><button class="copy-btn" onclick="copyText(this, this.closest('.q-card').querySelector('.q-text').innerText)">copy</button></div>
+        <p class="q-hint">One row = one track, in one region, in one month. Skip Rate is a rate, so average it rather than summing it.</p>
+      </div>
+      <div class="q-card">
+        <div class="q-level l2">2 · Discover</div>
+        <div class="prompt-row"><p class="q-text">What are the three most surprising things in this data? Show me a chart for each and tell me why it matters.</p><button class="copy-btn" onclick="copyText(this, this.closest('.q-card').querySelector('.q-text').innerText)">copy</button></div>
+        <p class="q-hint">Then push back: "Why?" and "Is that a real pattern or a quirk of the data?" The best insights come from the second and third question.</p>
+      </div>
+      <div class="q-card">
+        <div class="q-level l3">3 · Insight hunt</div>
+        <p class="q-hint" style="margin:0 0 6px;">7 stories are hiding in this data. Turn each question into your own prompt.</p>
+        <div class="hunt-list">
+          <div class="hunt"><p class="hunt-q"><span class="hunt-icon">🎄</span>Is there a genre that only shows up for part of the year?</p><p class="q-hint">Try monthly streams by genre. Does any genre behave differently from the rest?</p></div>
+          <div class="hunt"><p class="hunt-q"><span class="hunt-icon">🚀</span>Which track grew the fastest this year, and which other measure moved with it?</p><p class="q-hint">Compare growth rather than totals, then look at Shares per 1,000 streams.</p></div>
+          <div class="hunt"><p class="hunt-q"><span class="hunt-icon">🕯️</span>Did any artist have one month that looks nothing like the rest?</p><p class="q-hint">Plot monthly streams by artist and look for a single spike.</p></div>
+          <div class="hunt"><p class="hunt-q"><span class="hunt-icon">🌍</span>Does where a listener lives change what they listen to?</p><p class="q-hint">Show each genre's share of streams by region, not total streams.</p></div>
+          <div class="hunt"><p class="hunt-q"><span class="hunt-icon">⏭️</span>What makes listeners hit skip?</p><p class="q-hint">Compare average Skip Rate by Explicit, Duration (Sec) and Genre.</p></div>
+          <div class="hunt"><p class="hunt-q"><span class="hunt-icon">💰</span>Who earns more for every 1,000 streams: major or independent labels?</p><p class="q-hint">Build a ratio: SUM(Revenue) ÷ SUM(Streams) × 1,000, by Label Type.</p></div>
+          <div class="hunt"><p class="hunt-q"><span class="hunt-icon">📉</span>Is the platform growing?</p><p class="q-hint">Trend total streams by month, then compare streams per track by Track Age (Months).</p></div>
+        </div>
+      </div>
+      <div class="q-card">
+        <div class="q-level l4">4 · Present it</div>
+        <div class="prompt-row"><p class="q-text">Using the Tableau MCP, connect to the Music Streaming Charts data source and find the three most surprising insights in it. For each one, give me a headline, the key number and a chart, as a one-page HTML data story.</p><button class="copy-btn" onclick="copyText(this, this.closest('.q-card').querySelector('.q-text').innerText)">copy</button></div>
+        <p class="q-hint">Paste this into Claude with the Tableau MCP connected. Claude queries your published data source directly. Does it find the same stories you did?</p>
+      </div>
+    </div>
+
+    <!-- STUDIO: FILM -->
+    <div class="tab-panel" id="studio-film">
+      <div class="q-card">
+        <div class="q-level l1">1 · Vibe-code</div>
+        <div class="prompt-row"><p class="q-text">Build me a box office dashboard: KPI tiles for box office, budget and ROI (box office ÷ budget); box office by release year; the top 10 films; ROI by genre; and critic vs audience score as a scatter plot.</p><button class="copy-btn" onclick="copyText(this, this.closest('.q-card').querySelector('.q-text').innerText)">copy</button></div>
+        <p class="q-hint">One row = one film in one region. Budget and Box Office are split by region, so SUM them per film.</p>
+      </div>
+      <div class="q-card">
+        <div class="q-level l2">2 · Discover</div>
+        <div class="prompt-row"><p class="q-text">What are the three most surprising things in this data? Show me a chart for each and tell me why it matters.</p><button class="copy-btn" onclick="copyText(this, this.closest('.q-card').querySelector('.q-text').innerText)">copy</button></div>
+        <p class="q-hint">Then push back: "Why?" and "Is that a real pattern or a quirk of the data?"</p>
+      </div>
+      <div class="q-card">
+        <div class="q-level l3">3 · Insight hunt</div>
+        <p class="q-hint" style="margin:0 0 6px;">7 stories are hiding in this data.</p>
+        <div class="hunt-list">
+          <div class="hunt"><p class="hunt-q"><span class="hunt-icon">💸</span>Which film made the most money for every dollar spent, and which lost the most?</p><p class="q-hint">Build ROI as SUM(Box Office) ÷ SUM(Budget), and profit as Box Office − Budget, for each film.</p></div>
+          <div class="hunt"><p class="hunt-q"><span class="hunt-icon">🍅</span>Do critics and audiences ever completely disagree?</p><p class="q-hint">Plot Critic Score against Audience Score for each film and look for the biggest gap.</p></div>
+          <div class="hunt"><p class="hunt-q"><span class="hunt-icon">📅</span>Is there a best and a worst month to release a film? Is it the same for Horror?</p><p class="q-hint">Use the month of Release Date and compare average box office per film, then filter to Horror.</p></div>
+          <div class="hunt"><p class="hunt-q"><span class="hunt-icon">🦠</span>Was there a period when cinemas went quiet? Has the industry recovered?</p><p class="q-hint">Trend total box office by Release Year.</p></div>
+          <div class="hunt"><p class="hunt-q"><span class="hunt-icon">🔁</span>Are sequels better, or just bigger?</p><p class="q-hint">Compare average Critic Score, Audience Score and Box Office per film for Sequel vs New.</p></div>
+          <div class="hunt"><p class="hunt-q"><span class="hunt-icon">🔞</span>Does the age rating change how much a film earns?</p><p class="q-hint">Compare median ROI per film by Rating.</p></div>
+          <div class="hunt"><p class="hunt-q"><span class="hunt-icon">🏆</span>Which genre wins the awards, and does it make money?</p><p class="q-hint">Compare Awards Nominations and median ROI by Genre.</p></div>
+        </div>
+      </div>
+      <div class="q-card">
+        <div class="q-level l4">4 · Present it</div>
+        <div class="prompt-row"><p class="q-text">Using the Tableau MCP, connect to the Film Box Office data source and find the three most surprising insights in it. For each one, give me a headline, the key number and a chart, as a one-page HTML data story.</p><button class="copy-btn" onclick="copyText(this, this.closest('.q-card').querySelector('.q-text').innerText)">copy</button></div>
+        <p class="q-hint">Paste this into Claude with the Tableau MCP connected.</p>
+      </div>
+    </div>
+
+    <!-- STUDIO: SPORT -->
+    <div class="tab-panel" id="studio-sport">
+      <div class="q-card">
+        <div class="q-level l1">1 · Vibe-code</div>
+        <div class="prompt-row"><p class="q-text">Build me a football league dashboard: a league table (points, wins, goal difference) filtered by league and season; wage bill vs points as a scatter plot; home vs away points per match; and goals per match by league.</p><button class="copy-btn" onclick="copyText(this, this.closest('.q-card').querySelector('.q-text').innerText)">copy</button></div>
+        <p class="q-hint">One row = one team's view of one match, so there are two rows per match.</p>
+      </div>
+      <div class="q-card">
+        <div class="q-level l2">2 · Discover</div>
+        <div class="prompt-row"><p class="q-text">What are the three most surprising things in this data? Show me a chart for each and tell me why it matters.</p><button class="copy-btn" onclick="copyText(this, this.closest('.q-card').querySelector('.q-text').innerText)">copy</button></div>
+        <p class="q-hint">Then push back: "Why?" and "Is that a real pattern or a quirk of the data?"</p>
+      </div>
+      <div class="q-card">
+        <div class="q-level l3">3 · Insight hunt</div>
+        <p class="q-hint" style="margin:0 0 6px;">6 stories are hiding in this data.</p>
+        <div class="hunt-list">
+          <div class="hunt"><p class="hunt-q"><span class="hunt-icon">💷</span>Does money buy titles? How often does the biggest spender win the league?</p><p class="q-hint">Build a league table (SUM(Points) by Team and Season), then compare each champion's wage bill with the rest.</p></div>
+          <div class="hunt"><p class="hunt-q"><span class="hunt-icon">🧚</span>Is there a champion that money can't explain?</p><p class="q-hint">Plot wage bill against points for every champion, or rank champions by wage bill.</p></div>
+          <div class="hunt"><p class="hunt-q"><span class="hunt-icon">👑</span>Does any club dominate its league for years?</p><p class="q-hint">Count league titles by team for each league.</p></div>
+          <div class="hunt"><p class="hunt-q"><span class="hunt-icon">🏟️</span>How much is home advantage worth, and was there a season it almost vanished?</p><p class="q-hint">Compare average Points per match for Home vs Away by Season, then bring in Attendance.</p></div>
+          <div class="hunt"><p class="hunt-q"><span class="hunt-icon">🟥</span>What does a red card cost a team?</p><p class="q-hint">Compare average Points, xG and xG Against for matches with and without a red card.</p></div>
+          <div class="hunt"><p class="hunt-q"><span class="hunt-icon">🎉</span>Which league is the most entertaining to watch?</p><p class="q-hint">Compare average Goals For per team per match by League.</p></div>
+        </div>
+      </div>
+      <div class="q-card">
+        <div class="q-level l4">4 · Present it</div>
+        <div class="prompt-row"><p class="q-text">Using the Tableau MCP, connect to the Football League Matches data source and find the three most surprising insights in it. For each one, give me a headline, the key number and a chart, as a one-page HTML data story.</p><button class="copy-btn" onclick="copyText(this, this.closest('.q-card').querySelector('.q-text').innerText)">copy</button></div>
+        <p class="q-hint">Paste this into Claude with the Tableau MCP connected.</p>
+      </div>
+    </div>
+
+    <!-- STUDIO: CARS -->
+    <div class="tab-panel" id="studio-cars">
+      <div class="q-card">
+        <div class="q-level l1">1 · Vibe-code</div>
+        <div class="prompt-row"><p class="q-text">Build me a used car market dashboard: KPI tiles for listings, median price and median days on market; value retained by age for each fuel type; average price by make; price vs odometer as a scatter plot; and listings by state.</p><button class="copy-btn" onclick="copyText(this, this.closest('.q-card').querySelector('.q-text').innerText)">copy</button></div>
+        <p class="q-hint">One row = one listing. Value Retained % = Listing Price ÷ Original MSRP, so average it and never sum it.</p>
+      </div>
+      <div class="q-card">
+        <div class="q-level l2">2 · Discover</div>
+        <div class="prompt-row"><p class="q-text">What are the three most surprising things in this data? Show me a chart for each and tell me why it matters.</p><button class="copy-btn" onclick="copyText(this, this.closest('.q-card').querySelector('.q-text').innerText)">copy</button></div>
+        <p class="q-hint">Then push back: "Why?" and "Is that a real pattern or a quirk of the data?"</p>
+      </div>
+      <div class="q-card">
+        <div class="q-level l3">3 · Insight hunt</div>
+        <p class="q-hint" style="margin:0 0 6px;">6 stories are hiding in this data.</p>
+        <div class="hunt-list">
+          <div class="hunt"><p class="hunt-q"><span class="hunt-icon">🔋</span>Which kind of car loses value the fastest?</p><p class="q-hint">Plot average Value Retained % by Age (Years), with one line per Fuel Type.</p></div>
+          <div class="hunt"><p class="hunt-q"><span class="hunt-icon">📈</span>Is any car worth more today than when it was new?</p><p class="q-hint">Filter to Value Retained % above 100%, then look at Make, Model and Year.</p></div>
+          <div class="hunt"><p class="hunt-q"><span class="hunt-icon">⚠️</span>Does any model have a model year that's out of step with the rest?</p><p class="q-hint">Plot Value Retained % by Year with one line per model, and look for a dip.</p></div>
+          <div class="hunt"><p class="hunt-q"><span class="hunt-icon">🎨</span>Does colour matter when you sell?</p><p class="q-hint">Compare average Value Retained % by Colour.</p></div>
+          <div class="hunt"><p class="hunt-q"><span class="hunt-icon">⏱️</span>Which cars sell fastest, and which sit on the lot?</p><p class="q-hint">Compare median Days on Market by Make and by Fuel Type.</p></div>
+          <div class="hunt"><p class="hunt-q"><span class="hunt-icon">🏅</span>Which brand holds its value best?</p><p class="q-hint">Rank makes by median Value Retained %. Exclude pre-1990 classics so the comparison is fair.</p></div>
+        </div>
+      </div>
+      <div class="q-card">
+        <div class="q-level l4">4 · Present it</div>
+        <div class="prompt-row"><p class="q-text">Using the Tableau MCP, connect to the Used Car Market data source and find the three most surprising insights in it. For each one, give me a headline, the key number and a chart, as a one-page HTML data story.</p><button class="copy-btn" onclick="copyText(this, this.closest('.q-card').querySelector('.q-text').innerText)">copy</button></div>
+        <p class="q-hint">Paste this into Claude with the Tableau MCP connected.</p>
+      </div>
+    </div>
+
   </div>
 </section>
 
-<!-- ========== PAGE 5: DATA APPS ========== -->
-<section class="page" data-page="5">
-  <div class="content-area" style="display:flex; flex-direction:column; justify-content:center;">
-    <div class="section-tag animate-in">Hands-on</div>
-    <h2 class="animate-in">Data Apps</h2>
-    <p class="animate-in dim">This section will be built next — Data Apps exercises and content.</p>
-  </div>
-</section>
-
-<!-- ========== PAGE 6: Q&A ========== -->
-<section class="page" data-page="6">
+<!-- ========== PAGE 7: Q&A ========== -->
+<section class="page" data-page="7">
   <div class="content-area" style="display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;">
     <div class="section-tag animate-in">11:40</div>
     <h2 class="animate-in">Q&amp;A</h2>
@@ -849,8 +1485,8 @@ a:hover { opacity: 0.8; }
   </div>
 </section>
 
-<!-- ========== PAGE 7: THANK YOU ========== -->
-<section class="page" data-page="7">
+<!-- ========== PAGE 8: THANK YOU ========== -->
+<section class="page" data-page="8">
   <div class="welcome-center">
     <div class="partner-row animate-in">
       <img src="images/elal-logo.svg" alt="El Al" style="height:40px;">
@@ -1003,6 +1639,12 @@ function toggleReveal(btn) {
 
 function copyQuestion(btn) {
   copyText(btn, btn.parentElement.querySelector('.q-copy').textContent.trim());
+}
+
+function showMcpClient(btn) {
+  const box = btn.closest('.mcp-clients'), on = !btn.classList.contains('selected');
+  box.querySelectorAll('[data-mcp-client]').forEach(b => b.classList.toggle('selected', on && b === btn));
+  box.querySelectorAll('[data-mcp-shot]').forEach(s => { s.hidden = !(on && s.dataset.mcpShot === btn.dataset.mcpClient); });
 }
 
 document.querySelectorAll('.setup-stepper').forEach(function(root) {
