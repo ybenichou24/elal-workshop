@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tableau x AI — El Al Workshop</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #0D1B4A;
+  --blue: #1A368F;
+  --sky: #63C7EF;
+  --sky-dim: rgba(99,199,239,0.15);
+  --sky-border: rgba(99,199,239,0.35);
+  --glass: rgba(255,255,255,0.07);
+  --glass-border: rgba(255,255,255,0.12);
+  --glass-hover: rgba(255,255,255,0.12);
+  --text: #f0f2f5;
+  --text-dim: rgba(240,242,245,0.6);
+  --radius: 16px;
+  --radius-sm: 10px;
+  --transition: 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { overflow: hidden; height: 100%; }
+body {
+  font-family: 'Roboto Mono', monospace;
+  color: var(--text);
+  height: 100%;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 100%);
+}
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none; z-index: 0;
+}
+body::after {
+  content: '';
+  position: fixed; inset: 0;
+  background:
+    radial-gradient(ellipse at 75% 15%, rgba(99,199,239,0.12) 0%, transparent 50%),
+    radial-gradient(ellipse at 20% 80%, rgba(26,54,143,0.3) 0%, transparent 50%);
+  pointer-events: none; z-index: 0;
+}
+
+/* ---- PAGES ---- */
+.pages-wrap {
+  display: flex;
+  height: 100vh;
+  transition: transform var(--transition);
+  will-change: transform;
+  position: relative; z-index: 1;
+}
+.page {
+  min-width: 100vw; height: 100vh;
+  overflow-y: auto; overflow-x: hidden;
+  display: flex; flex-direction: column;
+  padding: 60px 48px 100px;
+  position: relative;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.2) transparent;
+}
+.page::-webkit-scrollbar { width: 6px; }
+.page::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 3px; }
+
+/* ---- LOGOS ---- */
+.sf-logo {
+  position: absolute; top: 24px; right: 32px;
+  width: 160px; height: auto; opacity: 0.85;
+  z-index: 5; pointer-events: none;
+}
+.elal-logo {
+  position: absolute; top: 24px; left: 32px;
+  height: 48px; width: auto; opacity: 0.9;
+  z-index: 5; pointer-events: none;
+}
+
+/* ---- PLANE THEME ---- */
+.plane-icon {
+  position: absolute; z-index: 4; pointer-events: none;
+  animation: planeFloat 5s ease-in-out infinite;
+  filter: drop-shadow(0 8px 24px rgba(99,199,239,0.25));
+  font-size: 96px;
+}
+.plane-sm { font-size: 64px; bottom: 80px; left: 32px; }
+@keyframes planeFloat {
+  0%   { transform: translateY(0)    rotate(0deg); }
+  15%  { transform: translateY(-30px) rotate(3deg); }
+  30%  { transform: translateY(-18px) rotate(-2deg); }
+  50%  { transform: translateY(-36px) rotate(2deg); }
+  70%  { transform: translateY(-12px) rotate(-3deg); }
+  85%  { transform: translateY(-28px) rotate(1.5deg); }
+  100% { transform: translateY(0)    rotate(0deg); }
+}
+
+/* ---- NAVIGATION ---- */
+.nav-dots {
+  position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%);
+  display: flex; gap: 10px; z-index: 100;
+}
+.dot {
+  width: 12px; height: 12px; border-radius: 50%;
+  background: rgba(255,255,255,0.25);
+  border: none; cursor: pointer;
+  transition: all 0.4s ease;
+}
+.dot.active {
+  background: var(--sky);
+  box-shadow: 0 0 12px rgba(99,199,239,0.6);
+  transform: scale(1.25);
+}
+.dot:hover:not(.active) { background: rgba(255,255,255,0.5); }
+
+.nav-btn {
+  position: fixed; top: 50%; z-index: 100;
+  transform: translateY(-50%);
+  width: 48px; height: 48px;
+  border-radius: 50%; border: 1px solid var(--glass-border);
+  background: var(--glass);
+  backdrop-filter: blur(12px);
+  color: var(--text); font-size: 20px;
+  cursor: pointer; transition: all 0.3s;
+  display: flex; align-items: center; justify-content: center;
+}
+.nav-btn:hover { background: var(--sky-dim); border-color: var(--sky-border); }
+.nav-btn.hide { opacity: 0; pointer-events: none; }
+#prevBtn { left: 16px; }
+#nextBtn { right: 16px; }
+
+/* ---- TYPOGRAPHY ---- */
+.section-tag {
+  font-size: 11px; font-weight: 600;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: var(--sky); margin-bottom: 8px;
+}
+h1 { font-size: clamp(2rem, 5vw, 3.8rem); font-weight: 700; line-height: 1.1; }
+h2 { font-size: clamp(1.4rem, 3vw, 2.2rem); font-weight: 600; line-height: 1.2; margin-bottom: 16px; }
+h3 { font-size: 1rem; font-weight: 600; margin-bottom: 8px; }
+p, li { font-size: 14px; line-height: 1.7; color: var(--text); }
+.dim { color: var(--text-dim); }
+.sky { color: var(--sky); }
+.bold { font-weight: 600; }
+a { color: var(--sky); text-decoration: none; transition: opacity 0.2s; }
+a:hover { opacity: 0.8; }
+
+/* ---- CARDS ---- */
+.card {
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  padding: 24px;
+  backdrop-filter: blur(12px);
+  transition: border-color 0.3s, background 0.3s;
+}
+.card:hover { border-color: rgba(255,255,255,0.2); background: var(--glass-hover); }
+.card + .card { margin-top: 12px; }
+
+/* ---- CONTENT GRID ---- */
+.content-area {
+  max-width: 900px; width: 100%;
+  margin: 0 auto;
+  flex: 1;
+}
+
+/* ---- TABLE ---- */
+.agenda-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 4px;
+  font-size: 14px;
+}
+.agenda-table th {
+  text-align: left; padding: 10px 16px;
+  color: var(--sky); font-weight: 600;
+  font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+  border-bottom: 1px solid var(--glass-border);
+}
+.agenda-table td {
+  padding: 12px 16px;
+  background: var(--glass);
+}
+.agenda-table tr td:first-child { border-radius: var(--radius-sm) 0 0 var(--radius-sm); }
+.agenda-table tr td:last-child { border-radius: 0 var(--radius-sm) var(--radius-sm) 0; }
+.agenda-table tr.break-row td {
+  background: var(--sky-dim);
+  color: var(--sky); font-weight: 600;
+}
+
+/* ---- CTA BUTTON ---- */
+.cta {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 16px 36px;
+  border-radius: 40px;
+  border: none;
+  background: var(--sky);
+  color: var(--navy);
+  font-family: inherit; font-size: 15px; font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 4px 24px rgba(99,199,239,0.4);
+}
+.cta:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(99,199,239,0.5); }
+
+/* ---- TABS ---- */
+.tabs {
+  display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px;
+}
+.tab {
+  padding: 8px 18px;
+  border-radius: 24px;
+  border: 1px solid var(--glass-border);
+  background: var(--glass);
+  color: var(--text-dim);
+  font-family: inherit; font-size: 12px; font-weight: 500;
+  cursor: pointer; transition: all 0.3s;
+}
+.tab:hover { border-color: var(--sky-border); color: var(--text); }
+.tab.active {
+  background: var(--sky-dim);
+  border-color: var(--sky);
+  color: var(--sky);
+}
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+/* ---- STEP CARDS ---- */
+.step {
+  display: flex; gap: 16px; align-items: flex-start;
+}
+.step-num {
+  min-width: 56px; height: 56px;
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  background: var(--sky); color: var(--navy);
+  font-weight: 700; font-size: 22px;
+  flex-shrink: 0;
+}
+.step-body { flex: 1; }
+.step-body p { margin-bottom: 6px; }
+
+/* ---- Q CARD ---- */
+.q-card {
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  padding: 20px;
+  margin-bottom: 12px;
+}
+.q-card .q-level {
+  display: inline-block;
+  padding: 3px 10px; border-radius: 12px;
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 1px; text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.q-card .q-level.l1 { background: rgba(74,222,128,0.15); color: #4ade80; }
+.q-card .q-level.l2 { background: rgba(96,165,250,0.15); color: #60a5fa; }
+.q-card .q-level.l3 { background: rgba(251,191,36,0.15); color: #fbbf24; }
+.q-card .q-level.l4 { background: rgba(99,199,239,0.15); color: var(--sky); }
+.q-card .q-text { font-size: 14px; font-weight: 500; margin-bottom: 4px; line-height: 1.6; }
+.q-card .q-hint { font-size: 12px; color: var(--text-dim); margin-top: 4px; }
+
+/* ---- REVEAL ---- */
+.reveal-trigger {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 16px;
+  border-radius: 20px;
+  border: 1px solid var(--sky-border);
+  background: var(--sky-dim);
+  color: var(--sky);
+  font-family: inherit; font-size: 12px; font-weight: 500;
+  cursor: pointer; transition: all 0.3s;
+  margin-top: 8px;
+}
+.reveal-trigger:hover { background: rgba(99,199,239,0.25); }
+.reveal-trigger .arrow {
+  display: inline-block; transition: transform 0.3s;
+  font-size: 10px;
+}
+.reveal-trigger.open .arrow { transform: rotate(90deg); }
+.reveal-content {
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s;
+  opacity: 0;
+}
+.reveal-content.open {
+  max-height: 2000px; opacity: 1;
+  margin-top: 12px;
+}
+.reveal-inner {
+  padding: 16px;
+  background: rgba(99,199,239,0.06);
+  border-left: 3px solid var(--sky);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  font-size: 13px; line-height: 1.7;
+}
+
+/* ---- CREDENTIAL BLOCK ---- */
+.cred-block {
+  background: rgba(0,0,0,0.3);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  padding: 24px;
+  font-size: 13px;
+  line-height: 2.2;
+}
+.cred-block .label { color: var(--text-dim); display: inline-block; min-width: 120px; }
+.cred-block .val { color: var(--sky); font-weight: 600; }
+.copy-btn {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 2px 10px; margin-left: 8px;
+  border-radius: 6px; border: 1px solid var(--glass-border);
+  background: var(--glass); color: var(--text-dim);
+  font-family: inherit; font-size: 11px;
+  cursor: pointer; transition: all 0.2s;
+}
+.copy-btn:hover { border-color: var(--sky-border); color: var(--sky); }
+.copy-btn.copied { border-color: #4ade80; color: #4ade80; }
+
+/* ---- ANIMATIONS ---- */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes exitLeft {
+  to { opacity: 0; transform: translateX(-80px) scale(0.95); }
+}
+@keyframes exitRight {
+  to { opacity: 0; transform: translateX(80px) scale(0.95); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes pulseGlow {
+  0%,100% { box-shadow: 0 4px 24px rgba(99,199,239,0.4); }
+  50% { box-shadow: 0 4px 40px rgba(99,199,239,0.7); }
+}
+.animate-in {
+  opacity: 0;
+  transform: translateY(30px);
+}
+.page.active .animate-in {
+  animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.page.exiting .animate-in {
+  animation-fill-mode: forwards;
+  animation-duration: 0.45s;
+  animation-timing-function: cubic-bezier(0.55, 0, 1, 0.45);
+}
+
+/* ---- WELCOME PAGE ---- */
+.welcome-center {
+  flex: 1; display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center;
+  padding: 0 24px;
+}
+.welcome-center h1 { margin-bottom: 24px; }
+.welcome-center h1 span { color: var(--sky); }
+.welcome-text {
+  max-width: 720px; margin: 0 auto 40px;
+  font-size: 14px; line-height: 1.9;
+  color: rgba(240,242,245,0.85);
+}
+.welcome-cta { animation: pulseGlow 3s ease-in-out infinite; }
+
+/* ---- PARTNER LOGOS ---- */
+.partner-row {
+  display: flex; align-items: center; justify-content: center;
+  gap: 32px; margin-bottom: 40px;
+}
+.partner-row img { height: 56px; opacity: 0.9; }
+.partner-row .partner-x {
+  font-size: 24px; font-weight: 300; color: var(--text-dim);
+}
+
+/* ---- BREAK PAGE ---- */
+.break-center {
+  flex: 1; display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center; gap: 24px;
+}
+
+/* ---- SESSION TOGGLE ---- */
+.agenda-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.agenda-head h2 { margin-bottom: 0; }
+.session-toggle { position: relative; display: inline-flex; padding: 4px; border-radius: 24px; background: var(--glass); border: 1px solid var(--glass-border); }
+.session-toggle input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.session-toggle label { padding: 6px 20px; border-radius: 20px; font-size: 13px; font-weight: 600; letter-spacing: 1px; color: var(--text-dim); cursor: pointer; transition: background 0.25s, color 0.25s; }
+.session-toggle label:hover { color: var(--text); }
+.session-toggle input:checked + label { background: var(--sky); color: var(--navy); }
+
+.spacer { height: 16px; }
+
+/* ---- SETUP STEPPER ---- */
+.setup-stepper { background: var(--glass); border: 1px solid var(--glass-border); border-radius: var(--radius); padding: 24px; backdrop-filter: blur(12px); }
+.stepper-head { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; font-size: 13px; color: var(--text-dim); }
+.stepper-progress { flex: 1; height: 4px; background: rgba(255,255,255,0.1); border-radius: 2px; overflow: hidden; }
+.stepper-bar { height: 100%; background: var(--sky); border-radius: 2px; transition: width 0.4s ease; width: 0%; }
+.stepper-window { position: relative; }
+.setup-step { display: none; }
+.setup-step.active { display: block; animation: fadeInUp 0.4s ease forwards; }
+.step-instr { margin: 12px 0; padding: 12px 16px; background: rgba(0,0,0,0.2); border-radius: var(--radius-sm); font-size: 13px; line-height: 1.8; }
+.step-instr .row { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+.step-instr code { color: var(--sky); font-family: inherit; font-weight: 600; }
+.stepper-controls { display: flex; align-items: center; justify-content: space-between; margin-top: 16px; }
+.stepper-actions { display: flex; align-items: center; gap: 12px; }
+.stepper-btn { padding: 8px 20px; border-radius: 20px; border: 1px solid var(--sky-border); background: var(--sky-dim); color: var(--sky); font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.25s; }
+.stepper-btn:hover { background: rgba(99,199,239,0.25); }
+.stepper-btn:disabled { opacity: 0.3; cursor: default; }
+.stepper-complete { display: none; padding: 20px; text-align: center; font-size: 14px; color: var(--sky); }
+.stepper-complete.show { display: block; }
+.stepper-reset { margin-left: 12px; background: none; border: 1px solid var(--glass-border); color: var(--text-dim); font-family: inherit; font-size: 12px; padding: 4px 12px; border-radius: 12px; cursor: pointer; }
+
+/* screenshot images */
+.shot { display: block; margin: 12px auto 0; max-width: 600px; border-radius: var(--radius-sm); overflow: hidden; border: 1px solid var(--glass-border); transition: border-color 0.3s; }
+.shot img { width: 100%; display: block; }
+.shot:hover { border-color: var(--sky-border); }
+.shot-hint { display: block; text-align: center; font-size: 11px; color: var(--text-dim); padding: 6px; background: rgba(0,0,0,0.3); }
+</style>
+</head>
+<body>
+
+<!-- ============ PAGES ============ -->
+<div class="pages-wrap" id="pagesWrap">
+
+<!-- ========== PAGE 0: WELCOME ========== -->
+<section class="page active" data-page="0">
+  <img src="images/Tableau-From-Salesforce-Logo-REVERSE.png" class="sf-logo" alt="Tableau from Salesforce">
+  <div class="welcome-center">
+    <div class="partner-row animate-in">
+      <img src="images/elal-logo.svg" alt="El Al" style="height:64px; background:rgba(255,255,255,0.12); padding:8px 16px; border-radius:12px;">
+      <span class="partner-x">×</span>
+      <img src="images/Tableau-From-Salesforce-Logo-REVERSE.png" alt="Tableau" style="height:48px;">
+    </div>
+    <div class="section-tag animate-in">Workshop</div>
+    <h1 class="animate-in">Tableau <span>x AI</span></h1>
+    <p class="welcome-text animate-in">
+      Tableau has always given people a way to see their data clearly — and that foundation now powers something far more expansive. What was once a platform for building and sharing visualizations has evolved into a truly agentic analytic experience: one that explores alongside you, surfaces the narrative behind the numbers, and proactively uncovers insight before you even know to look for it.
+    </p>
+    <p class="welcome-text animate-in" style="margin-top:-20px;">
+      Built-in detection engines continuously scan for meaningful signals, while conversational analytics lets anyone engage with data in plain language and get a governed, trustworthy answer in return. This is Tableau's trusted foundation extended with genuine intelligence — deeper exploration, richer context, and insight that comes to you rather than waiting to be found.
+    </p>
+    <p class="welcome-text animate-in" style="margin-top:-20px;">
+      From built-in AI to headless analytics, Tableau is the platform to deliver accurate, contextual responses, visualisation and analytics for users to see, understand and act on data. So let's take a tour today through Tableau's ever evolving platform that enables every organisation to turn trusted knowledge into action.
+    </p>
+    <button class="cta welcome-cta animate-in" onclick="goToPage(current + 1)">Let's get Started <span style="font-size:18px;">→</span></button>
+  </div>
+</section>
+
+<!-- ========== PAGE 1: AGENDA ========== -->
+<section class="page" data-page="1">
+  <img src="images/Tableau-From-Salesforce-Logo-REVERSE.png" class="sf-logo" alt="">
+  <img src="images/elal-logo.svg" class="elal-logo" alt="El Al" style="background:rgba(255,255,255,0.1); padding:6px 12px; border-radius:8px;">
+  <div class="content-area">
+    <div class="section-tag animate-in">Schedule</div>
+    <div class="agenda-head animate-in">
+      <h2>Agenda</h2>
+    </div>
+    <div class="spacer"></div>
+    <div class="card animate-in">
+      <table class="agenda-table">
+        <thead><tr><th>Topic</th><th>Time</th></tr></thead>
+        <tbody>
+          <tr><td>Introduction</td><td>09:00</td></tr>
+          <tr><td>Tableau Knowledge</td><td>09:30</td></tr>
+          <tr><td>Tableau Agent in Pulse</td><td>09:50</td></tr>
+          <tr><td>Dashboard Q&amp;A</td><td>10:10</td></tr>
+          <tr class="break-row"><td>BREAK</td><td>10:30</td></tr>
+          <tr><td>Headless Analytics</td><td>11:00</td></tr>
+          <tr><td>Tableau Studio</td><td>11:30</td></tr>
+          <tr><td>Wrap-up</td><td>12:10</td></tr>
+          <tr class="break-row"><td>CLOSE</td><td>12:30</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ========== PAGE 2: PLACEHOLDER — SETUP ========== -->
+<section class="page" data-page="2">
+  <img src="images/Tableau-From-Salesforce-Logo-REVERSE.png" class="sf-logo" alt="">
+  <img src="images/elal-logo.svg" class="elal-logo" alt="El Al" style="background:rgba(255,255,255,0.1); padding:6px 12px; border-radius:8px;">
+  <div class="content-area" style="display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:16px;">
+    <div class="section-tag animate-in">Setup</div>
+    <h2 class="animate-in">Let's get Connected</h2>
+    <p class="animate-in dim">This section will be built next — Tableau Cloud setup steps.</p>
+  </div>
+</section>
+
+<!-- ========== PAGE 3: PLACEHOLDER — KNOWLEDGE ========== -->
+<section class="page" data-page="3">
+  <img src="images/Tableau-From-Salesforce-Logo-REVERSE.png" class="sf-logo" alt="">
+  <img src="images/elal-logo.svg" class="elal-logo" alt="El Al" style="background:rgba(255,255,255,0.1); padding:6px 12px; border-radius:8px;">
+  <div class="content-area" style="display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:16px;">
+    <div class="section-tag animate-in">Hands-on</div>
+    <h2 class="animate-in">Tableau Knowledge</h2>
+    <p class="animate-in dim">Coming soon — knowledge exercises.</p>
+  </div>
+</section>
+
+<!-- ========== PAGE 4: PLACEHOLDER — PULSE ========== -->
+<section class="page" data-page="4">
+  <img src="images/Tableau-From-Salesforce-Logo-REVERSE.png" class="sf-logo" alt="">
+  <img src="images/elal-logo.svg" class="elal-logo" alt="El Al" style="background:rgba(255,255,255,0.1); padding:6px 12px; border-radius:8px;">
+  <div class="content-area" style="display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:16px;">
+    <div class="section-tag animate-in">Hands-on</div>
+    <h2 class="animate-in">Tableau Agent in Pulse</h2>
+    <p class="animate-in dim">Coming soon — Pulse exercises.</p>
+  </div>
+</section>
+
+<!-- ========== PAGE 5: PLACEHOLDER — DASHBOARD ========== -->
+<section class="page" data-page="5">
+  <img src="images/Tableau-From-Salesforce-Logo-REVERSE.png" class="sf-logo" alt="">
+  <img src="images/elal-logo.svg" class="elal-logo" alt="El Al" style="background:rgba(255,255,255,0.1); padding:6px 12px; border-radius:8px;">
+  <div class="content-area" style="display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:16px;">
+    <div class="section-tag animate-in">Hands-on</div>
+    <h2 class="animate-in">Tableau Agent in Dashboard</h2>
+    <p class="animate-in dim">Coming soon — Dashboard Q&amp;A exercises.</p>
+  </div>
+</section>
+
+<!-- ========== PAGE 6: BREAK ========== -->
+<section class="page" data-page="6">
+  <img src="images/Tableau-From-Salesforce-Logo-REVERSE.png" class="sf-logo" alt="">
+  <div class="break-center">
+    <div class="section-tag animate-in">10:30</div>
+    <h1 class="animate-in" style="font-size:clamp(2rem,4vw,3rem);">Time for a Break ✈️</h1>
+    <p class="animate-in dim" style="font-size:16px;">Grab a coffee — we'll be back shortly.</p>
+  </div>
+</section>
+
+<!-- ========== PAGE 7: PLACEHOLDER — HEADLESS ========== -->
+<section class="page" data-page="7">
+  <img src="images/Tableau-From-Salesforce-Logo-REVERSE.png" class="sf-logo" alt="">
+  <img src="images/elal-logo.svg" class="elal-logo" alt="El Al" style="background:rgba(255,255,255,0.1); padding:6px 12px; border-radius:8px;">
+  <div class="content-area" style="display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:16px;">
+    <div class="section-tag animate-in">Hands-on</div>
+    <h2 class="animate-in">Headless Analytics</h2>
+    <p class="animate-in dim">Coming soon — Headless / MCP exercises.</p>
+  </div>
+</section>
+
+<!-- ========== PAGE 8: PLACEHOLDER — STUDIO ========== -->
+<section class="page" data-page="8">
+  <img src="images/Tableau-From-Salesforce-Logo-REVERSE.png" class="sf-logo" alt="">
+  <img src="images/elal-logo.svg" class="elal-logo" alt="El Al" style="background:rgba(255,255,255,0.1); padding:6px 12px; border-radius:8px;">
+  <div class="content-area" style="display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:16px;">
+    <div class="section-tag animate-in">Hands-on</div>
+    <h2 class="animate-in">Tableau Studio</h2>
+    <p class="animate-in dim">Coming soon — Studio exercises.</p>
+  </div>
+</section>
+
+<!-- ========== PAGE 9: WRAP-UP ========== -->
+<section class="page" data-page="9">
+  <img src="images/Tableau-From-Salesforce-Logo-REVERSE.png" class="sf-logo" alt="">
+  <img src="images/elal-logo.svg" class="elal-logo" alt="El Al" style="background:rgba(255,255,255,0.1); padding:6px 12px; border-radius:8px;">
+  <div class="content-area" style="display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:16px;">
+    <div class="section-tag animate-in">12:10</div>
+    <h2 class="animate-in">Wrap-up</h2>
+    <p class="animate-in dim">Coming soon — wrap-up and survey.</p>
+  </div>
+</section>
+
+<!-- ========== PAGE 10: THANK YOU ========== -->
+<section class="page" data-page="10">
+  <img src="images/Tableau-From-Salesforce-Logo-REVERSE.png" class="sf-logo" alt="">
+  <div class="welcome-center">
+    <div class="partner-row animate-in">
+      <img src="images/elal-logo.svg" alt="El Al" style="height:64px; background:rgba(255,255,255,0.12); padding:8px 16px; border-radius:12px;">
+      <span class="partner-x">×</span>
+      <img src="images/Tableau-From-Salesforce-Logo-REVERSE.png" alt="Tableau" style="height:48px;">
+    </div>
+    <div class="section-tag animate-in">12:30</div>
+    <h2 class="animate-in" style="font-size:clamp(1.6rem,3.5vw,2.6rem);">Thank You!</h2>
+    <p class="welcome-text animate-in">
+      Thank you for joining us today! We hope you enjoyed exploring Tableau's AI-powered analytics platform.
+      If you have any questions or want to continue the conversation, don't hesitate to reach out.
+    </p>
+    <p class="animate-in" style="font-size:48px;">✈️🎉</p>
+  </div>
+</section>
+
+</div><!-- /pages-wrap -->
+
+<!-- ============ NAVIGATION ============ -->
+<div class="nav-dots" id="navDots"></div>
+<button class="nav-btn hide" id="prevBtn" aria-label="Previous page">◂</button>
+<button class="nav-btn" id="nextBtn" aria-label="Next page">▸</button>
+
+<!-- ============ SCRIPT ============ -->
+<script>
+const wrap = document.getElementById('pagesWrap');
+const pages = document.querySelectorAll('.page');
+const dotsContainer = document.getElementById('navDots');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const totalPages = pages.length;
+let current = 0;
+let isTransitioning = false;
+
+for (let i = 0; i < totalPages; i++) {
+  const dot = document.createElement('button');
+  dot.className = 'dot' + (i === 0 ? ' active' : '');
+  dot.setAttribute('aria-label', 'Go to page ' + (i + 1));
+  dot.addEventListener('click', () => goToPage(i));
+  dotsContainer.appendChild(dot);
+}
+
+function goToPage(n) {
+  if (n < 0 || n >= totalPages || n === current || isTransitioning) return;
+  isTransitioning = true;
+  const direction = n > current ? 'left' : 'right';
+  const exitAnim = direction === 'left' ? 'exitLeft' : 'exitRight';
+  const oldPage = pages[current];
+
+  oldPage.classList.remove('active');
+  oldPage.classList.add('exiting');
+  const exitEls = oldPage.querySelectorAll('.animate-in');
+  exitEls.forEach((el, idx) => {
+    el.style.animation = `${exitAnim} 0.4s cubic-bezier(0.55, 0, 1, 0.45) forwards`;
+    el.style.animationDelay = (0.12 * idx) + 's';
+  });
+
+  const exitDuration = Math.min(600, 120 + exitEls.length * 80);
+  setTimeout(() => {
+    current = n;
+    wrap.style.transform = `translateX(-${current * 100}vw)`;
+
+    dotsContainer.querySelectorAll('.dot').forEach((d, i) => {
+      d.classList.toggle('active', i === current);
+    });
+
+    prevBtn.classList.toggle('hide', current === 0);
+    nextBtn.classList.toggle('hide', current === totalPages - 1);
+  }, exitDuration);
+
+  setTimeout(() => {
+    oldPage.classList.remove('exiting');
+    exitEls.forEach(el => {
+      el.style.animation = '';
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(30px)';
+      el.style.animationDelay = '';
+    });
+
+    pages[current].classList.add('active');
+    pages[current].scrollTop = 0;
+
+    pages[current].querySelectorAll('.animate-in').forEach((el, idx) => {
+      el.style.opacity = '';
+      el.style.transform = '';
+      el.style.animationDelay = (0.24 * idx) + 's';
+    });
+
+    isTransitioning = false;
+  }, exitDuration + 600);
+}
+
+prevBtn.addEventListener('click', () => goToPage(current - 1));
+nextBtn.addEventListener('click', () => goToPage(current + 1));
+
+const inField = el => el instanceof Element && !!el.closest('input, textarea, select');
+document.addEventListener('keydown', e => {
+  if (inField(e.target)) return;
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { e.preventDefault(); goToPage(current + 1); }
+  if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); goToPage(current - 1); }
+});
+
+let touchStartX = 0, touchStartY = 0, touchInField = false;
+document.addEventListener('touchstart', e => {
+  touchStartX = e.touches[0].clientX;
+  touchStartY = e.touches[0].clientY;
+  touchInField = inField(e.target);
+}, { passive: true });
+document.addEventListener('touchend', e => {
+  if (touchInField) return;
+  const dx = e.changedTouches[0].clientX - touchStartX;
+  const dy = e.changedTouches[0].clientY - touchStartY;
+  if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 60) {
+    if (dx < 0) goToPage(current + 1);
+    else goToPage(current - 1);
+  }
+});
+
+document.querySelectorAll('.tabs').forEach(tabGroup => {
+  tabGroup.querySelectorAll('.tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      const targetId = tab.dataset.tab;
+      tabGroup.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      const container = tabGroup.parentElement;
+      container.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      document.getElementById(targetId).classList.add('active');
+    });
+  });
+});
+
+document.querySelectorAll('.reveal-trigger').forEach(btn => {
+  btn.addEventListener('click', () => {
+    btn.classList.toggle('open');
+    const content = btn.nextElementSibling;
+    if (content && content.classList.contains('reveal-content')) {
+      content.classList.toggle('open');
+    }
+  });
+});
+
+function copyText(btn, text) {
+  navigator.clipboard.writeText(text).then(() => {
+    btn.classList.add('copied');
+    btn.textContent = 'copied!';
+    setTimeout(() => { btn.classList.remove('copied'); btn.textContent = 'copy'; }, 1500);
+  });
+}
+</script>
+
+</body>
+</html>
