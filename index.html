@@ -640,7 +640,7 @@ a:hover { opacity: 0.8; }
     <p class="animate-in" style="margin-bottom:12px; line-height:1.8;">Get your Tableau Cloud login from Hot Pass and sign in. Click <strong>Next</strong> after each step to move on.</p>
     <div class="setup-stepper animate-in" id="cloudStepper">
       <div class="stepper-head">
-        <span>Step <strong class="stepper-current">1</strong> of <span class="stepper-total">5</span></span>
+        <span>Step <strong class="stepper-current">1</strong> of <span class="stepper-total">6</span></span>
         <div class="stepper-progress"><div class="stepper-bar"></div></div>
         <span><strong class="stepper-done-count">0</strong> done</span>
       </div>
@@ -656,17 +656,22 @@ a:hover { opacity: 0.8; }
         <a class="shot" href="images/cloud/step-02.webp" target="_blank" rel="noopener"><img src="images/cloud/step-02.webp" alt="Email inviting you to Tableau Cloud" loading="lazy"><span class="shot-hint">⤢ Click to enlarge</span></a>
       </div>
       <div class="setup-step" data-step="3">
-        <div class="step"><div class="step-num">3</div><div class="step-body"><h3>Or open Tableau Cloud from Hot Pass</h3><p>Your Hot Pass page links straight to the site too.</p></div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-body"><h3>Enter your username and choose the site if prompted</h3><p>Tableau Cloud will prompt if you have access to more than one site</p></div></div>
+        <div class="step-instr"><div class="row"><span>Enter the URI <code>hot-tableauxai</code></span><button class="copy-btn" onclick="copyText(this,'hot-tableauxai')">copy</button></div></div>
+        <a class="shot" href="images/studio-setup/step-04.webp" target="_blank" rel="noopener"><img src="images/studio-setup/step-04.webp" alt="Sign in page with URI hot-tableauxai" loading="lazy"><span class="shot-hint">⤢ Click to enlarge</span></a>
+      </div>
+      <div class="setup-step" data-step="4">
+        <div class="step"><div class="step-num">4</div><div class="step-body"><h3>Or open Tableau Cloud from Hot Pass</h3><p>Your Hot Pass page links straight to the site too.</p></div></div>
         <div class="step-instr">You can also <strong>Open Tableau Cloud</strong> from here</div>
         <a class="shot" href="images/cloud/step-03.webp" target="_blank" rel="noopener"><img src="images/cloud/step-03.webp" alt="Hot Pass access page with Open Tableau Cloud button" loading="lazy"><span class="shot-hint">⤢ Click to enlarge</span></a>
       </div>
-      <div class="setup-step" data-step="4">
-        <div class="step"><div class="step-num">4</div><div class="step-body"><h3>Welcome to HOT Tableau XAI</h3><p>This is the Tableau Cloud site for today's hands-on.</p></div></div>
+      <div class="setup-step" data-step="5">
+        <div class="step"><div class="step-num">5</div><div class="step-body"><h3>Welcome to HOT Tableau XAI</h3><p>This is the Tableau Cloud site for today's hands-on.</p></div></div>
         <div class="step-instr"><div class="row"><span>You're logged into <strong>HOT Tableau XAI</strong>!</span></div><div class="row"><span>Note options for <strong>Tableau Knowledge</strong> and <strong>Tableau Pulse</strong> in the left hand menu. We'll be using those shortly.</span></div></div>
         <a class="shot" href="images/cloud/step-04.webp" target="_blank" rel="noopener"><img src="images/cloud/step-04.webp" alt="Tableau Cloud home page on HOT Tableau XAI" loading="lazy"><span class="shot-hint">⤢ Click to enlarge</span></a>
       </div>
-      <div class="setup-step" data-step="5">
-        <div class="step"><div class="step-num">5</div><div class="step-body"><h3>Favourite the workshop project</h3><p>The workshop's dashboards and data sources are all in one project.</p></div></div>
+      <div class="setup-step" data-step="6">
+        <div class="step"><div class="step-num">6</div><div class="step-body"><h3>Favourite the workshop project</h3><p>The workshop's dashboards and data sources are all in one project.</p></div></div>
         <div class="step-instr">Find and Favourite the <strong>Tableau x AI Workshop</strong> project. We'll use it throughout the session</div>
         <a class="shot" href="images/cloud/step-05.webp" target="_blank" rel="noopener"><img src="images/cloud/step-05.webp" alt="Tableau x AI Workshop project in Explore" loading="lazy"><span class="shot-hint">⤢ Click to enlarge</span></a>
       </div>
@@ -1139,7 +1144,7 @@ a:hover { opacity: 0.8; }
 
     <div class="setup-stepper animate-in" id="studioStepper">
       <div class="stepper-head">
-        <span>Step <strong class="stepper-current">1</strong> of <span class="stepper-total">8</span></span>
+        <span>Step <strong class="stepper-current">1</strong> of <span class="stepper-total">9</span></span>
         <div class="stepper-progress"><div class="stepper-bar"></div></div>
         <span><strong class="stepper-done-count">0</strong> done</span>
       </div>
@@ -1167,21 +1172,26 @@ a:hover { opacity: 0.8; }
       </div>
       <div class="setup-step" data-step="5">
         <div class="step"><div class="step-num">5</div><div class="step-body"><h3>Activated</h3><p>Tableau is now licensed through your Tableau Cloud account.</p></div></div>
-        <div class="step-instr">Tableau Studio activated! <strong>Continue</strong> and Register your details</div>
+        <div class="step-instr">Tableau Studio activated! Click <strong>Continue</strong></div>
         <a class="shot" href="images/studio-setup/step-05.webp" target="_blank" rel="noopener"><img src="images/studio-setup/step-05.webp" alt="Activation dialog confirming success" loading="lazy"><span class="shot-hint">⤢ Click to enlarge</span></a>
       </div>
       <div class="setup-step" data-step="6">
-        <div class="step"><div class="step-num">6</div><div class="step-body"><h3>Open Tableau Agent</h3><p>Tableau Agent lives in a panel on the right of the authoring window.</p></div></div>
+        <div class="step"><div class="step-num">6</div><div class="step-body"><h3>Complete Registration</h3><p>You need to complete registration of all fields.</p></div></div>
+        <div class="step-instr">Fill in all the required fields and click <strong>Register</strong></div>
+        <a class="shot" href="images/studio-setup/step-05b-registration.png" target="_blank" rel="noopener" style="max-width:360px;"><img src="images/studio-setup/step-05b-registration.png" alt="Tableau registration form with all fields" loading="lazy"><span class="shot-hint">⤢ Click to enlarge</span></a>
+      </div>
+      <div class="setup-step" data-step="7">
+        <div class="step"><div class="step-num">7</div><div class="step-body"><h3>Open Tableau Agent</h3><p>Tableau Agent lives in a panel on the right of the authoring window.</p></div></div>
         <div class="step-instr">Click on the <strong>White Tableau Logo</strong> top left to Open Authoring Mode. Open <strong>Tableau Agent</strong> from the rectangular speech bubble top right</div>
         <a class="shot" href="images/studio-setup/step-06.webp" target="_blank" rel="noopener"><img src="images/studio-setup/step-06.webp" alt="Tableau authoring window with Tableau Agent panel" loading="lazy"><span class="shot-hint">⤢ Click to enlarge</span></a>
       </div>
-      <div class="setup-step" data-step="7">
-        <div class="step"><div class="step-num">7</div><div class="step-body"><h3>Install the Claude Agent SDK</h3><p>Tableau Agent runs on the Claude Agent SDK. This happens once and may take a minute.</p></div></div>
+      <div class="setup-step" data-step="8">
+        <div class="step"><div class="step-num">8</div><div class="step-body"><h3>Install the Claude Agent SDK</h3><p>Tableau Agent runs on the Claude Agent SDK. This happens once and may take a minute.</p></div></div>
         <div class="step-instr"><strong>Proceed</strong> to install the Claude Agent SDK. Confirm <strong>Got it!</strong></div>
         <a class="shot" href="images/studio-setup/step-07.webp" target="_blank" rel="noopener"><img src="images/studio-setup/step-07.webp" alt="Tableau Agent panel installing Claude Agent SDK" loading="lazy"><span class="shot-hint">⤢ Click to enlarge</span></a>
       </div>
-      <div class="setup-step" data-step="8">
-        <div class="step"><div class="step-num">8</div><div class="step-body"><h3>Run a quick test</h3><p>Check that Tableau Agent can build a viz for you.</p></div></div>
+      <div class="setup-step" data-step="9">
+        <div class="step"><div class="step-num">9</div><div class="step-body"><h3>Run a quick test</h3><p>Check that Tableau Agent can build a viz for you.</p></div></div>
         <div class="step-instr"><div class="row"><span>Connect to the saved data source <strong>Sample - Superstore</strong> and ask Agent <em>"Show me the Sales by Category"</em></span><button class="copy-btn" onclick="copyText(this,'Show me the Sales by Category')">copy</button></div></div>
         <a class="shot" href="images/studio-setup/step-08.webp" target="_blank" rel="noopener"><img src="images/studio-setup/step-08.webp" alt="Tableau Agent answering with a bar chart of Sales by Category" loading="lazy"><span class="shot-hint">⤢ Click to enlarge</span></a>
       </div>
